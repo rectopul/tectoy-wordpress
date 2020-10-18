@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nupill</title>
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsivo.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+
+    <section class="content">
+
+      <!-- header -->
+      <header>
+        <nav class="row navbar navbar-light navbar-expand-lg justify-content-lg-between">
+          <button class="navbar-toggler col-xs-2 " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <a href="#" class="navbar-brand"><img src="images/logo.png" alt="Logo Nupill"></a>
+
+          <div class="collapse navbar-collapse col-lg-10 col-xs-12 justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="#">Produto</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Cuidados Diários</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Revenda</a></li>
+              <li class="nav-item active"><a class="nav-link" href="#">Compre</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Notícias</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Redes Sociais</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Download</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">SAC</a></li>
+              <li class="nav-item"><a class="nav-link button-pink" href="#">Nossa Loja</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- /header -->
+
+
+      <!-- middle -->
+      <section class="middle">
+
+        <!-- breadcrumb -->
+        <nav class="row" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Compre</li>
+          </ol>
+        </nav>
+        <!-- /breadcrumb -->
+
+
+
+        <!-- bloco Internal -->
+        <div class="compre internal">
+          <div class="row d-flex flex-wrap">
+
+            <div class="col-lg-6 col-sm-6 col-xs-12 order-1 order-sm-0 description">
+              <h1>Compre</h1>
+              <h3>Descubra onde a Nupill está.</h3>
+              <p>Compre na Kosmetic On-line ou procure o estabelecimento parceiro da Nupill mais próximo da sua casa.</p>
+
+              <div class="block-loja">
+                <h3>Compre na loja virtual:</h3>
+                <p><a href="#"><img src="images/kosmeticonline.png" alt="Logo Kosmetic" /></a></p>
+
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-xs-12 order-0 order-sm-1 image">
+              <img src="images/compre.png" alt="Foto Notícia" />
+            </div>
+
+        </div>
+        <!-- /bloco Internal -->
+
+
+        <!-- bloco Form Local -->
+        <div class="form-local description">
+          <form name="form-local" action="" method="GET">
+            <div class="row d-flex align-items-center justify-content-start justify-content-sm-center">
+              <h3 class="col-lg-12 col-sm-12 col-xs-12">Ou busque pela sua localização:</h3>
+              <!-- ***** -->
+              <!-- Não sei se vai usar type text ou select, fiz os dois exemplos -->
+              <!-- ***** -->
+              <div class="form-group col-lg-3 col-sm-6 col-xs-12">
+                <label for="estado">Estado</label>
+                <!--input type="text" name="estado" id="estado" class="form-control" required-->
+                <select class="form-control" id="estado">
+                  <option value="">Selecione</option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                  <option value="">4</option>
+                  <option value="">5</option>
+                </select>
+              </div>
+
+              <div class="form-group col-lg-3 col-sm-6 col-xs-12">
+                <label for="cidade">Cidade</label>
+                <input type="text" name="cidade" id="cidade" class="form-control" required>
+              </div>
+
+              <div class="form-group col-lg-3 col-sm-6 col-xs-12">
+                <label for="bairro">Bairro</label>
+                <input type="text" name="Bairro" id="Bairro" class="form-control" required>
+              </div>
+
+              <div class="col-lg-3 col-sm-6 col-xs-12">
+                <input type="submit" class="form-control btn btn-blue" value="Buscar Loja">
+              </div>
+
+
+            </div>
+
+            <!-- Select lightbox Estados, Cidades e Bairros -->
+            <div class="select-lightbox">
+              <ul class="row">
+                <!-- loop -->
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">São Paulo (SP)</a>
+                </li>
+                <!-- /loop -->
+
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Acre (AC)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Alagoas (AL)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Bahia (BA)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Ceará (CE)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Belo Horizonte (BH)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Acre (AC)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Alagoas (AL)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Belo Horizonte (BH)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Acre (AC)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Bahia (BA)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Ceará (CE)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Acre (AC)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Alagoas (AL)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Belo Horizonte (BH)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Acre (AC)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Bahia (BA)</a>
+                </li>
+                <li class="col-lg-2 col-sm-2 col-xs-4">
+                  <a href="#">Ceará (CE)</a>
+                </li>
+
+              </ul>
+            </div>
+            <!-- /Select lightbox Estados, Cidades e Bairros -->
+
+          </form>
+
+
+          <!-- bloco news list -->
+          <div class="local-list">
+            <ul class="row">
+              <p class="col-lg-12">12 resultados encontrados:</p>
+              <!-- loop -->
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <!-- /loop -->
+
+
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+              <li class="col-lg-3 col-sm-3 col-xs-6">
+                <a href="#">
+                  <h3>Boutique da Beleza</h3>
+                  <p>São Paulo - SP <br/>
+                    Rua Exemplo, 123 - Aclimação <br/>
+                    (00) 3123-4567
+                  </p>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <!-- bloco Form Local -->
+
+      </section>
+      <!-- /middle -->
+
+      <footer>
+        <div class="row d-flex flex-wrap">
+          <div class="col-lg-2 col-sm-4 col-xs-12"><a href="#"><img src="images/logo-rodape.png" /></a></div>
+
+          <div class="social col-lg-2 col-sm-4 col-xs-12">
+            <h3>Fique por dentro</h3>
+            <nav>
+              <a href="" class="facebook">Nupill Cosméticos</a>
+              <a href="" class="instagram">@nupill_oficial</a>
+              <a href="" class="youtube">Nupill Oficial</a>
+            </nav>
+          </div>
+
+          <div class="download col-lg-3 col-sm-4 col-xs-12">
+            <h3>Downloads</h3>
+            <p><a href=""><span>Clique aqui</span> para baixar nossos materiais institucionais (logos, lâminas, fotos de produtos, banners, etc).</a></p>
+          </div>
+
+          <div class="col-lg-3 col-sm-6 col-xs-12">
+            <h3>SAC - Fale conosco</h3>
+            <p><a href="tel:+551144868977" target="_blank"><span>Fixo</span> (11) 4486-8977</a></p>
+            <p><a href="https://api.whatsapp.com/send?phone=5500999999999&text=Olá,%20escreva%20aqui" target="_blank"><span>Whatsapp</span> (00) 00000-0000</a></p>
+            <p><a href="mailto:faleconosco@nupill.com.br" target="_blank"><span>E-mail</span> faleconosco@nupill.com.br</a></p>
+          </div>
+          <div class="copyright col-lg-2 col-sm-6 col-xs-12">
+            <p>Copyright © 2020 <br/>
+              Nupill Cosméticos.</p>
+          </div>
+        </div>
+      </footer>
+
+    </section><!-- /content -->
+
+  </body>
+</html>

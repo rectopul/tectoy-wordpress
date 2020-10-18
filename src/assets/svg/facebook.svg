@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="20px" viewBox="0 0 10 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="rodape-nupillinst" transform="translate(-559.000000, -90.000000)" fill="#3891C7" fill-rule="nonzero">
+            <g id="infos" transform="translate(315.000000, 40.000000)">
+                <g id="redes" transform="translate(225.000000, 0.000000)">
+                    <g id="fb" transform="translate(0.000000, 36.000000)">
+                        <path d="M27.1743188,17.3208333 L29,17.3208333 L29,14.1408333 C28.6850262,14.0975 27.6017832,14 26.3402216,14 C23.707941,14 21.9047579,15.6558333 21.9047579,18.6991667 L21.9047579,21.5 L19,21.5 L19,25.055 L21.9047579,25.055 L21.9047579,34 L25.4661278,34 L25.4661278,25.0558333 L28.2533956,25.0558333 L28.6958587,21.5008333 L25.4652946,21.5008333 L25.4652946,19.0516667 C25.4661278,18.0241667 25.7427714,17.3208333 27.1743188,17.3208333 L27.1743188,17.3208333 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

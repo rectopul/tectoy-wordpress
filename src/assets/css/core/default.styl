@@ -1,0 +1,45 @@
+
+html, body
+    margin: 0
+    padding: 0
+    display block
+    height 100%
+
+html
+    font-size: 100%
+
+body
+    font-family 'Overpass', sans-serif !important
+    display: block
+    outline: none
+
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    
+    & .navbar-dark 
+        
+        & .navbar-nav 
+            & .nav-link
+                color #ffffff
+            @media (max-width 768px)
+                
+                margin 0
+                padding 30px
+                display flex
+                .nav-link
+                    font-size 25px
+                    line-height 1
+                    margin-bottom 10px
+
+@media (min-width: 1200px)
+    .container
+        max-width 1300px !important
+
+
+
+$fixed-body
+    max-height 100vh
+    overflow hidden
+
+
+
