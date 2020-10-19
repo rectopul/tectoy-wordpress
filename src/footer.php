@@ -14,42 +14,34 @@
 
 ?>
 
-<footer class="footer container-fluid">
-    <div class="row">
-        <div class="col-md-6 chat"></div>
+<footer>
+    <div class="row d-flex flex-wrap">
+        <div class="col-lg-2 col-sm-4 col-xs-12"><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-rodape.png" /></a></div>
 
-        <div class="col-md-6 contact">
-            <h2>+55 14 3434-1290</h2>
-            <small>
-                <a href="mailto:contato@auaha.com.br">contato@auaha.com.br</a> <br>
-                R. Presidente Vargas, 308 Centro - Marília/SP
-            </small>
-            <div class="blog">
-                <h2>blog</h2>
-
-                <?php
-                if (has_nav_menu('footer')) {
-
-                    wp_nav_menu(array(
-                        'theme_location' => 'footer',
-                        'depth' => 2,
-                    ));
-                } elseif (!has_nav_menu('expanded')) {
-
-                    wp_list_pages(
-                        array(
-                            'match_menu_classes' => true,
-                            'show_sub_menu_icons' => true,
-                            'title_li' => false,
-                        )
-                    );
-                }
-                ?>
-            </div>
-
-            <div class="copyright">© 2020 Auaha - Bem vindo a nova era digital</div>
+        <div class="social col-lg-2 col-sm-4 col-xs-12">
+            <h3>Fique por dentro</h3>
+            <nav>
+                <a href="" class="facebook">Nupill Cosméticos</a>
+                <a href="" class="instagram">@nupill_oficial</a>
+                <a href="" class="youtube">Nupill Oficial</a>
+            </nav>
         </div>
 
+        <div class="download col-lg-3 col-sm-4 col-xs-12">
+            <h3>Downloads</h3>
+            <p><a href=""><span>Clique aqui</span> para baixar nossos materiais institucionais (logos, lâminas, fotos de produtos, banners, etc).</a></p>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+            <h3>SAC - Fale conosco</h3>
+            <p><a href="tel:+551144868977" target="_blank"><span>Fixo</span> (11) 4486-8977</a></p>
+            <p><a href="https://api.whatsapp.com/send?phone=5500999999999&text=Olá,%20escreva%20aqui" target="_blank"><span>Whatsapp</span> (00) 00000-0000</a></p>
+            <p><a href="mailto:faleconosco@nupill.com.br" target="_blank"><span>E-mail</span> faleconosco@nupill.com.br</a></p>
+        </div>
+        <div class="copyright col-lg-2 col-sm-6 col-xs-12">
+            <p>Copyright © 2020 <br />
+                Nupill Cosméticos.</p>
+        </div>
     </div>
 </footer>
 </div>

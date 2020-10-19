@@ -9,10 +9,64 @@
  color2 = #3890c7
  color3 = #676767
 
- html, body
-    height 100%
-    font-size 100%
-    font-family WorkSans !important
+$pale-grey = #eef8ff
+$accent-fill = #4a90e2
+$ice-blue = #e1f4ff
+$black = #323232
+$light-navy-blue = #2e2c7b
+$windows-blue = #3890c7
+$pale-grey-two = #f7fcff
+$white = #ffffff
+$brownish-grey = #676767
+$callout-background = #f5a623
+$error-fill = #d0021b
 
+.btn.btn-primary
+   border-radius 24px
+   box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.1)
+   background-color $windows-blue
+   color $white
+   line-height 1
+   padding 14px 70px
+
+@keyframes slideDown
+   from
+      transform translate(0, -20px)
+
+   to
+      transform translate(0, 0)
+
+
+
+div[class*=swiper-button-]
+   &.arrow_theme
+      width 16px
+      height 30px
+      background none
+      padding 0
+
+      right 30px
+
+      &:after
+         content none !important
+
+      svg
+         fill $white
+         width 16px
+         height 30px
+
+      &.swiper-button-prev
+         transform rotate(-180deg)
+         right auto
+         left 30px
+
+
+ html, body
+   height 100%
+   font-size 80%
+   font-family WorkSans !important
+
+   @media screen and (min-width 768px)
+      font-size 100%
 
 

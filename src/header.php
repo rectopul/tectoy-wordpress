@@ -96,9 +96,28 @@
         </header>
 
 
-        <!-- full banner -->
-        <section class="container-fluid">
-            <div class="row">
-                <?php get_template_part('template-parts/full', 'banner'); ?>
+
+        <?php if (is_home()) : ?>
+            <!-- full banner -->
+            <section class="container-fluid">
+                <div class="row">
+                    <?php get_template_part('template-parts/full', 'banner'); ?>
+                </div>
+            </section>
+        <?php else :
+
+            if (function_exists('yoast_breadcrumb')) {
+                yoast_breadcrumb('<div id="breadcrumbs" class="breadcrumbs container-fluid">', '</div>');
+            }
+        ?>
+        <?php endif; ?>
+
+        <!-- check template -->
+        <?php if (is_page_template('categories.php')) : ?>
+            <div class="container">
+                <!-- banner list -->
+                <div class="categories-banner swiper-container">
+                    <?php get_template_part('template-parts/content', 'banners'); ?>
+                </div>
             </div>
-        </section>
+        <?php endif; ?>

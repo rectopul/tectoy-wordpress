@@ -11,6 +11,12 @@ if (!function_exists('rmb_theme_setup')) {
     }
 }
 
+/**
+ * Enable api
+ */
+
+wp_enqueue_script('wp-api');
+
 function rmb_theme_setup_support()
 {
 
@@ -44,11 +50,13 @@ function rmb_theme_setup_support()
     // Add custom image size used in Cover Template.
 
     add_image_size('theme-fullscreen', 1980, 9999);
-    add_image_size('team_thumb', 310, 453);
+    add_image_size('single_thumbnail', 410, 450, true);
+    add_image_size('post_category', 410, 231);
     add_image_size('project_thumb', 650, 462, true);
     add_image_size('project_preview', 728, 463);
     add_image_size('view_large', 710, 420, true);
-
+    add_image_size('categories', 630, 365, true);
+    add_image_size('product_small', 198, 198, false);
     // Custom logo.
     $logo_width  = 120;
     $logo_height = 90;
@@ -153,6 +161,14 @@ function rmb_register_scripts()
 {
 
     wp_enqueue_script(
+        'instaFeed-js',
+        get_template_directory_uri() . '/js/instafeed.min.js',
+        array('jquery'),
+        '',
+        true
+    );
+
+    wp_enqueue_script(
         'bootstrap-js',
         get_template_directory_uri() . '/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js',
         array('jquery'),
@@ -198,6 +214,7 @@ function rmb_register_styles()
 
     wp_enqueue_style('theme-style', get_template_directory_uri() . '/assets/css/app.css');
     wp_enqueue_style('theme-style-custom', get_template_directory_uri() . '/css/style_other.css');
+    wp_enqueue_style('theme-style-responsive', get_template_directory_uri() . '/assets/css/responsivo.css');
     //wp_style_add_data('twentytwenty-style', 'rtl', 'replace');
 
     // Add output of Bootstrap settings as inline style.
@@ -242,6 +259,42 @@ require get_template_directory() . '/inc/madison/functions.php';
 function custom_types()
 {
     /**
+     * Post Type Videos
+     * custom post specific from this theme
+     */
+    $lojas = array(
+        'labels' => array(
+            'name' => __('Lojas'),
+            'singular_name' => __('Loja')
+        ),
+        'has_archive' => true,
+        'public' => true,
+        'rewrite' => array('slug' => 'loja'),
+        'menu_icon' => 'dashicons-location',
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'thumbnail')
+    );
+
+    register_post_type('loja', $lojas);
+    /**
+     * Post Type Videos
+     * custom post specific from this theme
+     */
+    $videos = array(
+        'labels' => array(
+            'name' => __('Videos'),
+            'singular_name' => __('Video')
+        ),
+        'has_archive' => true,
+        'public' => true,
+        'rewrite' => array('slug' => 'videos'),
+        'menu_icon' => 'dashicons-youtube',
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'thumbnail')
+    );
+
+    register_post_type('video', $videos);
+    /**
      * Post Type Equipe
      * custom post specific from this theme
      */
@@ -284,6 +337,41 @@ function custom_types()
 
 add_action('init', 'custom_types');
 
+/**
+ * Stick custom post
+ */
+
+function insertMetaboxes()
+{
+
+    add_meta_box('pseudosticky', 'Destaque', 'insertStickPost', 'product', 'side', 'high');
+
+    function insertStickPost($post, $metabox)
+    {
+        $entered = get_post_meta($post->ID, 'pseudosticky', true);
+
+        printf(
+            '<label><input name="pseudosticky" type="checkbox" %s> Destacar</label>',
+            $entered == "on" ? ' checked="checked"' : ''
+        );
+    }
+}
+
+add_action('add_meta_boxes', 'insertMetaboxes');
+
+// Save Meta Details
+add_action('save_post', 'save_details');
+
+function save_details()
+{
+    global $post;
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return $post->ID;
+    }
+
+    update_post_meta($post->ID, "pseudosticky", $_POST["pseudosticky"]);
+}
 
 
 /**
@@ -291,6 +379,39 @@ add_action('init', 'custom_types');
  */
 function reg_cat()
 {
+    /**
+     * Tipos de Babás
+     */
+    $shopCategory = array(
+        'name' => _x('Localização de lojas', 'taxonomy general name'),
+        'singular_name' => _x('Localização de loja', 'taxonomy singular name'),
+        'search_items' =>  __('Search Localização de lojas'),
+        'popular_items' => __('Popular Localização de lojas'),
+        'all_items' => __('Todos os Localização de lojas'),
+        'parent_item' => null,
+        'parent_item_colon' => null,
+        'edit_item' => __('Editar Localização de loja'),
+        'update_item' => __('Atualizar Localização de loja'),
+        'add_new_item' => __('Adicionar Novo Localização de loja'),
+        'new_item_name' => __('Novo Localização de loja'),
+        'separate_items_with_commas' => __('Separate Localização de lojas with commas'),
+        'add_or_remove_items' => __('Add or remove Localização de lojas'),
+        'choose_from_most_used' => __('Choose from the most used Localização de lojas'),
+        'menu_name' => __('Localização de loja'),
+    );
+    register_taxonomy('shop_location', array('loja'), array(
+        'hierarchical' => true,
+        'labels' => $shopCategory,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'show_in_rest' => true,
+        'show_in_nav_menus' => true,
+        'show_tagcloud' => true,
+        'rewrite' => array('slug' => 'shop_location'),
+    ));
+
+
     /**
      * Tipos de Babás
      */
@@ -323,6 +444,7 @@ function reg_cat()
         'rewrite' => array('slug' => 'product_category'),
     ));
 }
+
 add_action('init', 'reg_cat');
 
 if (!function_exists('wp_body_open')) {
