@@ -40,7 +40,8 @@ get_header(); ?>
             </div>
 
             <div class="col-lg-6 col-sm-6 col-xs-12 order-0 order-sm-1 image">
-                <img src="images/compre.png" alt="Foto Notícia" />
+                <img src="<?php echo get_template_directory_uri(); ?>/images/compre.png" alt="Foto Notícia" />
+
             </div>
 
         </div>
@@ -60,26 +61,43 @@ get_header(); ?>
                         <!--input type="text" name="estado" id="estado" class="form-control" required-->
                         <select class="form-control" id="estado">
                             <option value="">Selecione</option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
+                            <!-- loop wordpress -->
+                            <?php
+
+                            $terms = get_terms(array(
+                                'taxonomy' => 'shop_location',
+                                'hide_empty' => false,
+                            ));
+
+
+                            foreach ($terms as $term) {
+                                if (!$term->parent) {
+                                    printf(
+                                        '<option value="%s">%s</option>',
+                                        $term->term_id,
+                                        $term->name
+                                    );
+                                }
+                            }
+
+                            ?>
                         </select>
                     </div>
 
                     <div class="form-group col-lg-3 col-sm-6 col-xs-12">
                         <label for="cidade">Cidade</label>
-                        <input type="text" name="cidade" id="cidade" class="form-control" required>
+                        <select type="text" name="cidade" id="cidade" class="form-control">
+                        </select>
                     </div>
 
                     <div class="form-group col-lg-3 col-sm-6 col-xs-12">
                         <label for="bairro">Bairro</label>
-                        <input type="text" name="Bairro" id="Bairro" class="form-control" required>
+                        <select type="text" name="Bairro" id="Bairro" class="form-control">
+                        </select>
                     </div>
 
                     <div class="col-lg-3 col-sm-6 col-xs-12">
-                        <input type="submit" class="form-control btn btn-blue" value="Buscar Loja">
+                        <input type="submit" class="form-control btn btn-blue btn-filter-apply" value="Buscar Loja">
                     </div>
 
 
@@ -91,119 +109,45 @@ get_header(); ?>
             <!-- bloco news list -->
             <div class="local-list">
                 <ul class="row">
-                    <p class="col-lg-12">12 resultados encontrados:</p>
+
                     <!-- loop -->
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
+
+                    <?php
+                    $args = array(
+                        'post_type' => 'loja',
+                        'posts_per_page' => 12
+                    );
+
+                    $query = new WP_Query($args);
+
+                    $cities = [];
+
+                    // The Loop
+                    if ($query->have_posts()) {
+                        $count = $query->post_count;
+
+                        echo  '<p class="col-lg-12 shops__result">' . $count . ' resultados encontrados:</p>';
+
+                        while ($query->have_posts()) {
+                            $query->the_post();
+
+                            printf(
+                                '<li class="col-lg-3 col-sm-3 col-xs-6">
+                                    <a href="%s">
+                                        <h3>%s</h3>
+                                        <p>%s</p>
+                                    </a>
+                                </li>',
+                                get_the_permalink(),
+                                get_the_title(),
+                                get_the_content()
+                            );
+                        }
+                    }
+
+                    wp_reset_postdata();
+                    ?>
                     <!-- /loop -->
-
-
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
-                    <li class="col-lg-3 col-sm-3 col-xs-6">
-                        <a href="#">
-                            <h3>Boutique da Beleza</h3>
-                            <p>São Paulo - SP <br />
-                                Rua Exemplo, 123 - Aclimação <br />
-                                (00) 3123-4567
-                            </p>
-                        </a>
-                    </li>
 
                 </ul>
             </div>

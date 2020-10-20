@@ -13,7 +13,7 @@ get_header(); ?>
 <div class="container my-5">
     <div class="row">
         <div class="col-md-auto template-categories__title">
-            <h2>Produtos Nupill</h2>
+            <h2><?php the_title(); ?></h2>
             <h4>Nosso catálogo completo.</h4>
         </div>
 

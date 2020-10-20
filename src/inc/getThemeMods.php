@@ -113,6 +113,66 @@ function shop_image()
     echo wp_get_attachment_image(get_theme_mod('shop_image'), 'view_large');
 }
 
+//contact_mail, contact_cell, contact_phone
+
+function the_contact_mail()
+{
+    echo get_theme_mod('contact_mail');
+}
+function get_contact_mail()
+{
+    return get_theme_mod('contact_mail');
+}
+
+function the_contact_cell()
+{
+    echo get_theme_mod('contact_cell');
+}
+function get_the_contact_cell()
+{
+    return get_theme_mod('contact_cell');
+}
+
+function the_contact_phone()
+{
+    echo get_theme_mod('contact_phone');
+}
+function get_the_contact_phone()
+{
+    return get_theme_mod('contact_phone');
+}
+
+/**
+ * Redes sociais
+ * * settings: social_facebook, social_instagram, social_youtube
+ */
+function the_social_facebook()
+{
+    echo get_theme_mod('social_facebook');
+}
+function get_social_facebook()
+{
+    return get_theme_mod('social_facebook');
+}
+
+function the_social_instagram()
+{
+    echo get_theme_mod('social_instagram');
+}
+function get_social_instagram()
+{
+    return get_theme_mod('social_instagram');
+}
+
+function the_social_youtube()
+{
+    echo get_theme_mod('social_youtube');
+}
+function get_social_youtube()
+{
+    return get_theme_mod('social_youtube');
+}
+
 /**
  * Imagens
  */

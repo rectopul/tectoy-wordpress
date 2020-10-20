@@ -10,10 +10,14 @@
 
 get_header(); ?>
 
-<?php if (have_posts()) : the_post(); ?>
+<div class="container">
 
-<?php get_template_part('template-parts/content', 'single'); ?>
+    <?php if (have_posts()) : the_post(); ?>
 
-<?php endif; ?>
+        <?php get_template_part('template-parts/content', 'single'); ?>
+
+    <?php endif; ?>
+</div>
+
 
 <?php get_footer(); ?>

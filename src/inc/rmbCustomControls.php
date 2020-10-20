@@ -104,6 +104,35 @@ function rmb_customize_sections($wp_customize)
         'panel'            => 'panel_home'
     ));
 
+    /**
+     * Contato
+     * panel: panel_home
+     * Informações de contato da empresa
+     */
+
+    $wp_customize->add_section('contacto', array(
+        'title'    => __('Contato', 'auaha'),
+        'capability' => 'edit_theme_options',
+        'description' => __('Edite informações de contato da empresa'),
+        'priority' => 7,
+        'panel'            => 'panel_home'
+    ));
+
+    /**
+     * Redes sociais
+     * panel: panel_home
+     * Informações de contato da empresa
+     * section: social_net
+     */
+
+    $wp_customize->add_section('social_net', array(
+        'title'    => __('Redes sociais', 'auaha'),
+        'capability' => 'edit_theme_options',
+        'description' => __('Informe as redes sociais da empresa'),
+        'priority' => 7,
+        'panel'            => 'panel_home'
+    ));
+
     //$wp_customize->get_section('header_title')->active_callback = 'is_front_page';
 }
 add_action('customize_register', 'rmb_customize_sections');
@@ -378,7 +407,49 @@ function rmb_customize_settings($wp_customize)
         'sanitize_callback' => 'wp_parse_id_list',
     ));
 
-    //$wp_customize->get_setting('featured_image_gallery')->transport = 'postMessage';
+    /**
+     * Contato
+     * section: contact
+     * Informações de contato da empresa
+     * settings: contact_mail, contact_cell, contact_phone
+     */
+    $wp_customize->add_setting('contact_mail', array(
+        'default' => '',
+        'section' => 'contacto',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_setting('contact_cell', array(
+        'default' => '',
+        'section' => 'contacto',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_setting('contact_phone', array(
+        'default' => '',
+        'section' => 'contacto',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    /**
+     * Redes sociais
+     * panel: panel_home
+     * Informações de contato da empresa
+     * section: social_net
+     * settings: social_facebook, social_instagram, social_youtube
+     */
+    $wp_customize->add_setting('social_facebook', array(
+        'default' => '',
+        'section' => 'social_net',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_setting('social_instagram', array(
+        'default' => '',
+        'section' => 'social_net',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_setting('social_youtube', array(
+        'default' => '',
+        'section' => 'social_net',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
 }
 add_action('customize_register', 'rmb_customize_settings');
 
@@ -674,6 +745,57 @@ function rmb_custom_controls($wp_customize)
         'section' => 'shop', // // Add a default or your own section
         'label' => __('Link para a loja'),
         'description' => __('Informe o link para sua loja.'),
+    ));
+
+    /**
+     * Contato
+     * section: contact
+     * Informações de contato da empresa
+     * settings: contact_mail, contact_cell, contact_phone
+     */
+    $wp_customize->add_control('contact_mail', array(
+        'type' => 'text',
+        'section' => 'contacto', // // Add a default or your own section
+        'label' => __('E-mail de contato da empresa'),
+        'description' => __('Informe um email para contato com a empresa.'),
+    ));
+    $wp_customize->add_control('contact_cell', array(
+        'type' => 'text',
+        'section' => 'contacto', // // Add a default or your own section
+        'label' => __('Calular com whatsapp '),
+        'description' => __('Informe um numero de celular com whatsapp.'),
+    ));
+    $wp_customize->add_control('contact_phone', array(
+        'type' => 'text',
+        'section' => 'contacto', // // Add a default or your own section
+        'label' => __('Telefone'),
+        'description' => __('Informe um Telefone para contato.'),
+    ));
+
+    /**
+     * Redes sociais
+     * panel: panel_home
+     * Informações de contato da empresa
+     * section: social_net
+     * settings: social_facebook, social_instagram, social_youtube
+     */
+    $wp_customize->add_control('social_facebook', array(
+        'type' => 'text',
+        'section' => 'social_net', // // Add a default or your own section
+        'label' => __('Facebook'),
+        'description' => __('Informe o link do facebook da empresa'),
+    ));
+    $wp_customize->add_control('social_instagram', array(
+        'type' => 'text',
+        'section' => 'social_net', // // Add a default or your own section
+        'label' => __('Instagram'),
+        'description' => __('Informe o link do instagram da empresa'),
+    ));
+    $wp_customize->add_control('social_youtube', array(
+        'type' => 'text',
+        'section' => 'social_net', // // Add a default or your own section
+        'label' => __('Youtube'),
+        'description' => __('Informe o link do canal do youtube da empresa'),
     ));
 
     /**

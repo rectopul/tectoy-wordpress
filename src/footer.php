@@ -21,22 +21,33 @@
         <div class="social col-lg-2 col-sm-4 col-xs-12">
             <h3>Fique por dentro</h3>
             <nav>
-                <a href="" class="facebook">Nupill Cosméticos</a>
-                <a href="" class="instagram">@nupill_oficial</a>
-                <a href="" class="youtube">Nupill Oficial</a>
+                <a href="<?php the_social_facebook(); ?>" class="facebook">Nupill Cosméticos</a>
+                <a href="<?php the_social_instagram(); ?>" class="instagram">@nupill_oficial</a>
+                <a href="<?php the_social_youtube(); ?>" class="youtube">Nupill Oficial</a>
             </nav>
         </div>
 
         <div class="download col-lg-3 col-sm-4 col-xs-12">
             <h3>Downloads</h3>
-            <p><a href=""><span>Clique aqui</span> para baixar nossos materiais institucionais (logos, lâminas, fotos de produtos, banners, etc).</a></p>
+            <p><a href="/download"><span>Clique aqui</span> para baixar nossos materiais institucionais (logos, lâminas, fotos de produtos, banners, etc).</a></p>
         </div>
 
         <div class="col-lg-3 col-sm-6 col-xs-12">
             <h3>SAC - Fale conosco</h3>
-            <p><a href="tel:+551144868977" target="_blank"><span>Fixo</span> (11) 4486-8977</a></p>
-            <p><a href="https://api.whatsapp.com/send?phone=5500999999999&text=Olá,%20escreva%20aqui" target="_blank"><span>Whatsapp</span> (00) 00000-0000</a></p>
-            <p><a href="mailto:faleconosco@nupill.com.br" target="_blank"><span>E-mail</span> faleconosco@nupill.com.br</a></p>
+            <p>
+                <a href="tel:+55<?php echo preg_replace('/[^0-9]/', '', get_the_contact_phone()); ?>" target="_blank">
+                    <span>Fixo</span> <?php the_contact_phone(); ?>
+                </a>
+            </p>
+            <p>
+                <a href="https://api.whatsapp.com/send?phone=55<?php echo preg_replace('/[^0-9]/', '', get_the_contact_cell()); ?>&text=Olá,%20escreva%20aqui" target="_blank"><span>Whatsapp</span> <?php the_contact_cell(); ?></a>
+            </p>
+
+            <p>
+                <a href="mailto:<?php the_contact_mail(); ?>" target="_blank">
+                    <span>E-mail</span> <?php the_contact_mail(); ?>
+                </a>
+            </p>
         </div>
         <div class="copyright col-lg-2 col-sm-6 col-xs-12">
             <p>Copyright © 2020 <br />

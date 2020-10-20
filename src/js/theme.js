@@ -158,7 +158,7 @@ const api = (() => {
       const target = document.querySelector(selector + ' .socials__wrapper');
 
       if(!target) return 
-      
+
       const feed = await getFaceFeed(token, pagename)
 
 
@@ -489,3 +489,179 @@ var youtubeCarrousel = new Swiper('.youtube__container', {
     }
   }
 });
+
+const filter = (() => {
+  //apply
+  function filterApply(selector) {
+    const btn = document.querySelector(selector);
+
+    if(!btn) return
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault()
+
+      const tax_id = btn.closest('form').elements['Bairro'].value
+
+      if(!tax_id) return 
+
+      getShops(tax_id).then(handleShops).catch(console.log)
+    });
+  }
+
+  function handleShops(list) {
+    const target = document.querySelector('.local-list ul');
+
+    const result = document.createElement('p')
+
+    result.classList.add('col-lg-12', 'shops__result')
+
+    if(!target) return
+
+    target.innerHTML = ``
+
+    if(!list.length) return target.innerHTML = `<li class="col-12">Nenhuma loja encontrada !</li>`
+
+    result.innerHTML = `${list.length} resultados encontrados:`
+
+    target.append(result)
+
+    list.map(shop => {
+
+      const { ID, content, image, link, title } = shop
+
+      const theShop = document.createElement('li')
+
+      theShop.classList.add('col-lg-3', 'col-sm-3', 'col-xs-6')
+
+      theShop.dataset.id = ID
+
+      theShop.innerHTML = `
+      <a href="${link}">
+          <h3>${title}</h3>
+          <p>${content}</p>
+      </a>
+      `
+
+      target.append(theShop)
+    })
+  }
+
+  function getShops(id) {
+    return new Promise((resolve, reject) => {
+      fetch(`/wp-json/wp/v2/shops/${id}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+        .then(r => r.json())
+        .then(resolve)
+        .catch(reject)
+    })
+  }
+
+  //childrens
+
+  function getTermChildren(term_id) {
+    return new Promise((resolve, reject) => {
+      fetch(`/wp-json/wp/v2/city/${term_id}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+        .then(r => r.json())
+        .then(resolve)
+        .catch(reject)
+    })
+  }
+
+  function getLocation(term_id) {
+    return new Promise((resolve, reject) => {
+      fetch(`/wp-json/wp/v2/location/${term_id}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+        .then(r => r.json())
+        .then(resolve)
+        .catch(reject)
+    })
+  }
+
+  function handleCities(list) {
+    const target = document.querySelector('.form-control#cidade');
+
+    if(!target) return 
+
+    target.innerHTML = ``
+
+    list.map(city => {
+      const option = document.createElement('option')
+
+      option.value = city.term_id
+
+      option.innerHTML = city.name
+
+      target.append(option)
+    })
+  }
+
+  function handleLocation(selector) {
+    const target = document.querySelector(selector);
+
+    if(!target) return 
+
+    target.addEventListener('change', function (e) {
+      // body
+      if(!target.value) return
+
+
+      getLocation(target.value).then(handleLocationValues)
+    });
+  }
+
+  function handleLocationValues(list) {
+    const target = document.querySelector('.form-control#Bairro');
+
+      if(!target) return 
+
+      target.innerHTML = ``
+
+      list.map(location => {
+        const option = document.createElement('option')
+
+        option.value = location.term_id
+
+        option.innerHTML = location.name
+
+        target.append(option)
+      })
+  }
+
+
+  //private var/functions
+  function select(selector) {
+    const input = document.querySelector(selector);
+
+    if(!input) return 
+
+    input.addEventListener('change', function (e) {
+      console.log(`mechi no seletor`);
+
+      getTermChildren(input.value).then(handleCities).catch(console.log)
+    });
+  }
+  
+  return {
+    //public var/functions
+    select,
+    handleLocation,
+    filterApply
+  }
+})()
+
+filter.select('.form-control#estado')
+filter.handleLocation('.form-control#cidade')
+filter.filterApply('.btn-filter-apply')
