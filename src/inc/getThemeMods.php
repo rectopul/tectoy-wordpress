@@ -1,7 +1,17 @@
 <?php
-function get_header_message()
+function home_title()
 {
-    echo nl2br(get_theme_mod('header_title'));
+    echo nl2br(get_theme_mod('home_title'));
+}
+
+function home_question()
+{
+    echo nl2br(get_theme_mod('home_question'));
+}
+
+function page_to_yes()
+{
+    echo get_page_link(get_theme_mod('page_to_yes'));
 }
 
 function company_location()

@@ -1,5 +1,9 @@
 <?php
 
+/* Stop errors if any */
+error_reporting(E_ERROR | E_PARSE);
+/* End stop Errors */
+
 /**
  * Theme Setup
  * get all supports and menus for this theme
@@ -8,6 +12,7 @@
 if (!function_exists('rmb_theme_setup')) {
     function rmb_theme_setup()
     {
+        add_post_type_support('page', 'excerpt');
     }
 }
 
@@ -22,6 +27,13 @@ function rmb_theme_setup_support()
 
     // Add default posts and comments RSS feed links to head.
     add_theme_support('automatic-feed-links');
+
+    // Add excerpt field in pages
+    add_post_type_support('page', 'excerpt');
+
+    // This adds support on thumbnails for pages only:
+    add_theme_support('post-thumbnails', array('page'));
+
 
     // Custom background color.
     add_theme_support(
@@ -49,7 +61,7 @@ function rmb_theme_setup_support()
 
     // Add custom image size used in Cover Template.
 
-    add_image_size('theme-fullscreen', 1980, 9999);
+    add_image_size('page-thumbnail', 571, 631);
     add_image_size('single_thumbnail', 410, 450, true);
     add_image_size('post_category', 410, 231);
     add_image_size('project_thumb', 650, 462, true);
@@ -212,9 +224,6 @@ function rmb_register_styles()
 
     //$theme_version = wp_get_theme()->get('Version');
 
-    wp_enqueue_style('theme-style', get_template_directory_uri() . '/assets/css/app.css');
-    wp_enqueue_style('theme-style-custom', get_template_directory_uri() . '/css/style_other.css');
-    wp_enqueue_style('theme-style-responsive', get_template_directory_uri() . '/assets/css/responsivo.css');
     //wp_style_add_data('twentytwenty-style', 'rtl', 'replace');
 
     // Add output of Bootstrap settings as inline style.
@@ -234,6 +243,9 @@ function rmb_register_styles()
         'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet',
         false
     );
+
+    wp_enqueue_style('font-SpaceGrotesk', get_template_directory_uri() . '/assets/fonts/spacegrotesk/font.css');
+    wp_enqueue_style('theme-style', get_template_directory_uri() . '/assets/css/app.css');
 }
 
 add_action('wp_enqueue_scripts', 'rmb_register_styles');
@@ -256,86 +268,11 @@ require_once get_template_directory() . '/inc/rmbCustomControls.php';
 require get_template_directory() . '/inc/madison/functions.php';
 
 
-function custom_types()
-{
-    /**
-     * Post Type Videos
-     * custom post specific from this theme
-     */
-    $lojas = array(
-        'labels' => array(
-            'name' => __('Lojas'),
-            'singular_name' => __('Loja')
-        ),
-        'has_archive' => true,
-        'public' => true,
-        'rewrite' => array('slug' => 'loja'),
-        'menu_icon' => 'dashicons-location',
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail')
-    );
-
-    register_post_type('loja', $lojas);
-    /**
-     * Post Type Videos
-     * custom post specific from this theme
-     */
-    $videos = array(
-        'labels' => array(
-            'name' => __('Videos'),
-            'singular_name' => __('Video')
-        ),
-        'has_archive' => true,
-        'public' => true,
-        'rewrite' => array('slug' => 'videos'),
-        'menu_icon' => 'dashicons-youtube',
-        'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail')
-    );
-
-    register_post_type('video', $videos);
-    /**
-     * Post Type Equipe
-     * custom post specific from this theme
-     */
-    $product = array(
-        'labels' => array(
-            'name' => __('Produtos'),
-            'singular_name' => __('Produto')
-        ),
-        'has_archive' => true,
-        'public' => true,
-        'rewrite' => array('slug' => 'product'),
-        'menu_icon' => 'dashicons-cart',
-        'show_in_rest' => true,
-        'taxonomies' => array('post_tag'),
-        'supports' => array('title', 'excerpt', 'editor', 'thumbnail')
-    );
-
-    register_post_type('product', $product);
-
-    /**
-     * Post Type Banner
-     * custom post specific from this theme
-     */
-    $banner = array(
-        'labels' => array(
-            'name' => __('Banners'),
-            'singular_name' => __('Banner')
-        ),
-        'has_archive' => true,
-        'public' => true,
-        'rewrite' => array('slug' => 'banner'),
-        'menu_icon' => 'dashicons-format-image',
-        'show_in_rest' => true,
-        'taxonomies' => array('post_tag'),
-        'supports' => array('title', 'editor', 'thumbnail')
-    );
-
-    register_post_type('banner', $banner);
-}
-
-add_action('init', 'custom_types');
+/**
+ * Custom post types and custom
+ * taxonomies files
+ */
+require_once get_template_directory() . '/inc/custom/posts.php';
 
 /**
  * Stick custom post
@@ -374,78 +311,6 @@ function save_details()
 }
 
 
-/**
- * Taxonomias
- */
-function reg_cat()
-{
-    /**
-     * Tipos de Babás
-     */
-    $shopCategory = array(
-        'name' => _x('Localização de lojas', 'taxonomy general name'),
-        'singular_name' => _x('Localização de loja', 'taxonomy singular name'),
-        'search_items' =>  __('Search Localização de lojas'),
-        'popular_items' => __('Popular Localização de lojas'),
-        'all_items' => __('Todos os Localização de lojas'),
-        'parent_item' => null,
-        'parent_item_colon' => null,
-        'edit_item' => __('Editar Localização de loja'),
-        'update_item' => __('Atualizar Localização de loja'),
-        'add_new_item' => __('Adicionar Novo Localização de loja'),
-        'new_item_name' => __('Novo Localização de loja'),
-        'separate_items_with_commas' => __('Separate Localização de lojas with commas'),
-        'add_or_remove_items' => __('Add or remove Localização de lojas'),
-        'choose_from_most_used' => __('Choose from the most used Localização de lojas'),
-        'menu_name' => __('Localização de loja'),
-    );
-    register_taxonomy('shop_location', array('loja'), array(
-        'hierarchical' => true,
-        'labels' => $shopCategory,
-        'show_ui' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'show_in_rest' => true,
-        'show_in_nav_menus' => true,
-        'show_tagcloud' => true,
-        'rewrite' => array('slug' => 'shop_location'),
-    ));
-
-
-    /**
-     * Tipos de Babás
-     */
-    $productCategory = array(
-        'name' => _x('Categorias de Produtos', 'taxonomy general name'),
-        'singular_name' => _x('Categoria de produto', 'taxonomy singular name'),
-        'search_items' =>  __('Search Categorias de Produtos'),
-        'popular_items' => __('Popular Categorias de Produtos'),
-        'all_items' => __('Todos os Categorias de Produtos'),
-        'parent_item' => null,
-        'parent_item_colon' => null,
-        'edit_item' => __('Editar Categoria de produto'),
-        'update_item' => __('Atualizar Categoria de produto'),
-        'add_new_item' => __('Adicionar Novo Categoria de produto'),
-        'new_item_name' => __('Novo Categoria de produto'),
-        'separate_items_with_commas' => __('Separate Categorias de Produtos with commas'),
-        'add_or_remove_items' => __('Add or remove Categorias de Produtos'),
-        'choose_from_most_used' => __('Choose from the most used Categorias de Produtos'),
-        'menu_name' => __('Categoria de produto'),
-    );
-    register_taxonomy('product_category', array('product'), array(
-        'hierarchical' => true,
-        'labels' => $productCategory,
-        'show_ui' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'show_in_rest' => true,
-        'show_in_nav_menus' => true,
-        'show_tagcloud' => true,
-        'rewrite' => array('slug' => 'product_category'),
-    ));
-}
-
-add_action('init', 'reg_cat');
 
 if (!function_exists('wp_body_open')) {
 
@@ -514,123 +379,17 @@ function wpb_first_and_last_menu_class($items)
 }
 add_filter('wp_nav_menu_objects', 'wpb_first_and_last_menu_class');
 
-/**
- * Rotas api
- */
-add_action('rest_api_init', function () {
-    register_rest_route('wp/v2', '/city/(?P<id>\d+)', array(
-        'methods' => 'GET',
-        'callback' => 'api_get_cities',
-    ));
-});
 
 /**
- * Grab latest post title by an author!
- *
- * @param array $data Options for the function.
- * @return string|null Post title for the latest,  * or null if none.
+ * GET Routes of api
  */
-function api_get_cities($data)
-{
+require_once get_template_directory() . '/inc/api/routes.php';
 
-    $terms = get_terms(array(
-        'taxonomy' => 'shop_location',
-        'hide_empty' => false,
-    ));
 
-    $cities = [];
-
-    foreach ($terms as $term) {
-        if ($term->parent == $data['id']) $cities[] = $term;
-    }
-
-    return $cities;
-}
 
 /**
- * Rotas api
+ * Customization form login
+ * This file contains all structure for modify 
+ * the form of register new users
  */
-add_action('rest_api_init', function () {
-    register_rest_route('wp/v2', '/location/(?P<id>\d+)', array(
-        'methods' => 'GET',
-        'callback' => 'api_get_locations',
-    ));
-});
-
-/**
- * Grab latest post title by an author!
- *
- * @param array $data Options for the function.
- * @return string|null Post title for the latest,  * or null if none.
- */
-function api_get_locations($data)
-{
-
-    $terms = get_terms(array(
-        'taxonomy' => 'shop_location',
-        'hide_empty' => false,
-    ));
-
-    $cities = [];
-
-    foreach ($terms as $term) {
-        if ($term->parent == $data['id']) $cities[] = $term;
-    }
-
-    return $cities;
-}
-
-/**
- * Rotas api
- * Get shops by tax id
- */
-add_action('rest_api_init', function () {
-    register_rest_route('wp/v2', '/shops/(?P<id>\d+)', array(
-        'methods' => 'GET',
-        'callback' => 'api_get_shops',
-    ));
-});
-
-/**
- * Grab latest post title by an author!
- *
- * @param array $data Options for the function.
- * @return string|null Post title for the latest,  * or null if none.
- */
-function api_get_shops($data)
-{
-
-    $args = array(
-        'post_type' => 'loja',
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'shop_location',
-                'field' => 'term_id',
-                'terms' => $data['id']
-            )
-        )
-    );
-
-    $query = new WP_Query($args);
-
-    $cities = [];
-
-    // The Loop
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-
-            $cities[] = [
-                'title' => get_the_title(),
-                'image' => get_the_post_thumbnail(),
-                'content' => get_the_content(),
-                'link' => get_the_permalink(),
-                'ID' => get_the_id()
-            ];
-        }
-    }
-
-    wp_reset_postdata();
-
-    return $cities;
-}
+require_once get_template_directory() . '/inc/register/functions.php';

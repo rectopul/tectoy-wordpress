@@ -1,33 +1,39 @@
 /**
  * APP Default
  */
- Overpass = 'Overpass', sans-serif
 
- WorkSans = 'Work Sans', sans-serif
+ SpaceGrotesk = 'SpaceGrotesk', sans-serif
 
- color1 = #2e2c7b
- color2 = #3890c7
- color3 = #676767
+font($font-family, $font-size, $font-weight, $color, $line-height, $text-align)
+   font-family $font-family
+   font-size $font-size
+   font-weight $font-weight
+   font-stretch normal
+   font-style normal
+   line-height $line-height
+   color $color
+   text-align $text-align
 
-$pale-grey = #eef8ff
-$accent-fill = #4a90e2
-$ice-blue = #e1f4ff
-$black = #323232
-$light-navy-blue = #2e2c7b
-$windows-blue = #3890c7
-$pale-grey-two = #f7fcff
-$white = #ffffff
-$brownish-grey = #676767
-$callout-background = #f5a623
-$error-fill = #d0021b
+size($width, $height)
+   width $width
+   height $height
 
-.btn.btn-primary
-   border-radius 24px
-   box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.1)
-   background-color $windows-blue
-   color $white
-   line-height 1
-   padding 14px 70px
+/**
+ * font-family SpaceGrotesk
+   font-size 1.2rem
+   font-weight bold
+   font-stretch normal
+   font-style normal
+   line-height 2
+   letter-spacing -1.2px
+   text-align left
+   color color4 !important
+*/
+
+color1 = #7906AE
+color2 = #FEE8F9
+color3 = #F5D9F4
+color4 = #FF00C6
 
 @keyframes slideDown
    from
@@ -64,7 +70,7 @@ div[class*=swiper-button-]
  html, body
    height 100%
    font-size 80%
-   font-family WorkSans !important
+   font-family SpaceGrotesk !important
 
    .btn-filter-apply
       background-color $windows-blue

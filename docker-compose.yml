@@ -7,7 +7,7 @@ services:
         expose:
             - 3306
         networks:
-            - nupril
+            - volker
         environment:
             MYSQL_ROOT_PASSWORD: wordpress
             MYSQL_DATABASE: wordpress
@@ -22,13 +22,11 @@ services:
             - ./wp-content:/var/www/html/wp-content
         expose:
             - 80
-        ports:
-            - 8003:80
         networks:
-            - nupril
+            - volker
             - nginx-proxy
         environment:
-            VIRTUAL_HOST: localhost
+            VIRTUAL_HOST: volker.localhost
             WORDPRESS_DB_HOST: db:3306
             WORDPRESS_DB_USER: wordpress
             WORDPRESS_DB_PASSWORD: wordpress
@@ -40,10 +38,10 @@ services:
         expose:
             - 80
         networks:
-            - nupril
+            - volker
             - nginx-proxy
         environment:
-            VIRTUAL_HOST: phpmyadmin.nupril.localhost
+            VIRTUAL_HOST: phpmyadmin.volker.localhost
             PMA_USERNAME: wordpress
             PMA_PASSWORD: wordpress
             PMA_HOSTS: db
@@ -53,7 +51,7 @@ volumes:
     db_data:
 
 networks:
-    nupril:
+    volker:
     nginx-proxy:
         external:
             name: proxy_default

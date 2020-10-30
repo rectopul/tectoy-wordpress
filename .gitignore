@@ -7,7 +7,9 @@ wp-content/update
 wp-content/index.php
 wp-content/plugins/akismet/
 wp-content/plugins/all-in-one-wp-migration/storage/*
+wp-content/plugins/*.zip
+wp-content/plugins/*.rar
 wp-content/plugins/hello.php
 wp-content/ai1wm-backups/*
 wp-content/themes/*
-wp-content/uploads/*
+wp-content/uploads

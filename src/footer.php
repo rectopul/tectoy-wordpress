@@ -14,49 +14,85 @@
 
 ?>
 
-<footer>
-    <div class="row d-flex flex-wrap">
-        <div class="col-lg-2 col-sm-4 col-xs-12"><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-rodape.png" /></a></div>
-
-        <div class="social col-lg-2 col-sm-4 col-xs-12">
-            <h3>Fique por dentro</h3>
-            <nav>
-                <a href="<?php the_social_facebook(); ?>" class="facebook">Nupill Cosméticos</a>
-                <a href="<?php the_social_instagram(); ?>" class="instagram">@nupill_oficial</a>
-                <a href="<?php the_social_youtube(); ?>" class="youtube">Nupill Oficial</a>
-            </nav>
-        </div>
-
-        <div class="download col-lg-3 col-sm-4 col-xs-12">
-            <h3>Downloads</h3>
-            <p><a href="/download"><span>Clique aqui</span> para baixar nossos materiais institucionais (logos, lâminas, fotos de produtos, banners, etc).</a></p>
-        </div>
-
-        <div class="col-lg-3 col-sm-6 col-xs-12">
-            <h3>SAC - Fale conosco</h3>
-            <p>
-                <a href="tel:+55<?php echo preg_replace('/[^0-9]/', '', get_the_contact_phone()); ?>" target="_blank">
-                    <span>Fixo</span> <?php the_contact_phone(); ?>
-                </a>
-            </p>
-            <p>
-                <a href="https://api.whatsapp.com/send?phone=55<?php echo preg_replace('/[^0-9]/', '', get_the_contact_cell()); ?>&text=Olá,%20escreva%20aqui" target="_blank"><span>Whatsapp</span> <?php the_contact_cell(); ?></a>
-            </p>
-
-            <p>
-                <a href="mailto:<?php the_contact_mail(); ?>" target="_blank">
-                    <span>E-mail</span> <?php the_contact_mail(); ?>
-                </a>
-            </p>
-        </div>
-        <div class="copyright col-lg-2 col-sm-6 col-xs-12">
-            <p>Copyright © 2020 <br />
-                Nupill Cosméticos.</p>
-        </div>
+<footer class="container-fluid template-footer py-5">
+    <div class="container">
+        <div class="col-12">© 2020 Volker International. All rights reserved. </div>
     </div>
 </footer>
+
 </div>
 </section>
+
+<!-- Modal cadastro e login -->
+<?php if (is_page_template('page-home.php')) : ?>
+    <!-- Modal modal register -->
+    <div class="modal fade modal-login" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-4 py-5">
+                <div class="modal-header">
+                    <header class="modal-login__title">
+                        <h2>Cadastre-se</h2>
+                        <h3>para votar.</h3>
+                    </header>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form class="modal-login__form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Nome">
+                                </div>
+                                <div class="form-group">
+                                    <input type="mail" class="form-control" name="email" id="email" placeholder="E-mail">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="whatsapp" id="whatsapp" placeholder="Whatsapp">
+                                </div>
+                                <button type="submit" class="btn btn-primary">OK! Pronto.</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Parental -->
+    <div class="modal fade parental" id="parentalModal" tabindex="-1" aria-labelledby="parentalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Você tem <br>
+                        mais de 18 anos?</h2>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row my-3">
+                        <div class="col-12">
+                            <button class="btn btn-rose-clean" data-dismiss="modal">Sim</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-purple">Não</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+
+
+
+<script id="__bs_script__">
+    //<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.26.12'><\/script>".replace("HOST", location.hostname));
+    //]]>
+</script>
 <?php wp_footer(); ?>
 </body>
 

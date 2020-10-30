@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'SpaceGrotesk';
+    src: url('SpaceGrotesk-SemiBold.eot');
+    src: url('SpaceGrotesk-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('SpaceGrotesk-SemiBold.ttf') format('truetype'), url('SpaceGrotesk-Bold.woff') format('woff'),
+        url('SpaceGrotesk-Bold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@import url('bold.css');
+@import url('light.css');
+@import url('regular.css');

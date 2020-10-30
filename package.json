@@ -1,6 +1,6 @@
 {
-    "name": "nupril",
-    "theme": "nupril",
+    "name": "volker",
+    "theme": "volker",
     "version": "1.0.0",
     "description": "Theme Default",
     "main": "gulpfile.js",

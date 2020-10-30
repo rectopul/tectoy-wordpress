@@ -9,12 +9,18 @@ html
     font-size: 100%
 
 body
-    font-family 'Overpass', sans-serif !important
     display: block
     outline: none
 
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
+
+    .modal-backdrop
+        background-color rgba(255,255,255,.45)
+        opacity 1 !important
+
+    .bg-rose
+        background-color color2
     
     & .navbar-dark 
         
@@ -31,6 +37,36 @@ body
                     line-height 1
                     margin-bottom 10px
 
+    // Default titles
+    h2
+        font(SpaceGrotesk, 3rem, bold, color1, normal, left)
+        line-height 1
+        letter-spacing -3px
+
+    h3
+        font(SpaceGrotesk, 2rem, bold, color4, normal, left)
+        line-height 1.1
+        letter-spacing -2.1px
+
+    h4
+        font-size 1.8rem
+        font-weight normal
+        line-height 1.1
+        letter-spacing -2.1px
+        text-align left
+        color #ff00c6
+
+    h6
+        font-size 1.5rem
+        font-weight normal
+        font-stretch normal
+        font-style normal
+        line-height 1.64
+        letter-spacing -1.4px
+        text-align left
+        color #7906ae
+
+
 @media (min-width: 1200px)
     .container
         max-width 1300px !important
@@ -40,6 +76,7 @@ body
 $fixed-body
     max-height 100vh
     overflow hidden
+
 
 
 

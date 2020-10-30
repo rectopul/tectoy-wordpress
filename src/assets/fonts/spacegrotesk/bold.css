@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'SpaceGrotesk';
+    src: url('SpaceGrotesk-Bold.eot');
+    src: url('SpaceGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
+        url('SpaceGrotesk-Bold.ttf') format('truetype'), url('SpaceGrotesk-Bold.woff') format('woff'),
+        url('SpaceGrotesk-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}

@@ -8,8 +8,8 @@ function rmb_customize_panels($wp_customize)
     $wp_customize->add_panel('panel_home', array(
         'priority'       => 40,
         'capability'     => 'edit_theme_options',
-        'title'          => 'Sobre a empresa',
-        'description'    => 'Editar textos e informações sobre a empresa',
+        'title'          => 'Conteúdo do site',
+        'description'    => 'Editar textos e conteúdos do site',
     ));
 
     /**
@@ -31,109 +31,13 @@ add_action('customize_register', 'rmb_customize_panels');
  */
 function rmb_customize_sections($wp_customize)
 {
-    $wp_customize->add_section('header_title', array(
-        'title'    => __('Informações', 'auaha'),
+    $wp_customize->add_section('home_title', array(
+        'title'    => __('Home Page', 'auaha'),
         'capability' => 'edit_theme_options',
-        'description' => __('Preencha os campos com informações úteis sobre a empresa'),
+        'description' => __('Edite os conteúdos da homepage'),
         'priority' => 2,
         'panel'            => 'panel_home'
     ));
-
-    /**
-     * Sede da empresa
-     */
-
-    $wp_customize->add_section('company_location', array(
-        'title'    => __('Informações de localização', 'auaha'),
-        'capability' => 'edit_theme_options',
-        'description' => __('Preencha os campos com informações úteis sobre a localização da empresa'),
-        'priority' => 2,
-        'panel'            => 'panel_home'
-    ));
-
-    /**
-     * Section from Jobs E-commerce 
-     * settings: jobs_1
-     */
-
-    $wp_customize->add_section('block1', array(
-        'title'    => __('Blocos 1', 'auaha'),
-        'capability' => 'edit_theme_options',
-        'description' => __('Blocos editáveis para incrementar o layout', 'auaha'),
-        'priority' => 3,
-        'panel'            => 'panel_jobs'
-    ));
-
-    /**
-     * Section from Jobs estratégia digital
-     * settings: jobs_2
-     */
-
-    $wp_customize->add_section('commitment', array(
-        'title'    => __('Compromisso', 'auaha'),
-        'capability' => 'edit_theme_options',
-        'description' => __('Fale um pouco sobre o compromisso da empresa'),
-        'priority' => 4,
-        'panel'            => 'panel_home'
-    ));
-
-
-    /**
-     * Section from blocks compromisso
-     * commitment_blocks
-     */
-
-    $wp_customize->add_section('commitment_blocks', array(
-        'title'    => __('Blocos Compromisso', 'auaha'),
-        'capability' => 'edit_theme_options',
-        'description' => __('Edite os blocos de compromisso'),
-        'priority' => 5,
-        'panel'            => 'panel_home'
-    ));
-
-    /**
-     * Section from shop
-     * shop
-     */
-
-    $wp_customize->add_section('shop', array(
-        'title'    => __('Loja', 'auaha'),
-        'capability' => 'edit_theme_options',
-        'description' => __('Edite informações sobre a loja'),
-        'priority' => 6,
-        'panel'            => 'panel_home'
-    ));
-
-    /**
-     * Contato
-     * panel: panel_home
-     * Informações de contato da empresa
-     */
-
-    $wp_customize->add_section('contacto', array(
-        'title'    => __('Contato', 'auaha'),
-        'capability' => 'edit_theme_options',
-        'description' => __('Edite informações de contato da empresa'),
-        'priority' => 7,
-        'panel'            => 'panel_home'
-    ));
-
-    /**
-     * Redes sociais
-     * panel: panel_home
-     * Informações de contato da empresa
-     * section: social_net
-     */
-
-    $wp_customize->add_section('social_net', array(
-        'title'    => __('Redes sociais', 'auaha'),
-        'capability' => 'edit_theme_options',
-        'description' => __('Informe as redes sociais da empresa'),
-        'priority' => 7,
-        'panel'            => 'panel_home'
-    ));
-
-    //$wp_customize->get_section('header_title')->active_callback = 'is_front_page';
 }
 add_action('customize_register', 'rmb_customize_sections');
 
@@ -143,311 +47,32 @@ add_action('customize_register', 'rmb_customize_sections');
  */
 function rmb_customize_settings($wp_customize)
 {
-    $wp_customize->add_setting('header_title', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-    $wp_customize->get_setting('header_title')->transport = 'postMessage';
-
     /**
-     * Image about partner
+     * Home page title
+     * section: home_title
      */
-
-    $wp_customize->add_setting('about_image', array(
-        'default'           => '',
-        'section'           => 'header_title',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-    $wp_customize->get_setting('about_image')->transport = 'postMessage';
-
-    /**
-     * Sede da empresa
-     * company_location
-     */
-
-    $wp_customize->add_setting('company_location', array(
-        'default'           => '',
-        'section'           => 'company_location',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('company_location')->transport = 'postMessage';
-
-    /**
-     * image from location company
-     */
-
-    $wp_customize->add_setting('company_location_image', array(
-        'default'           => '',
-        'section'           => 'company_location',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('company_location_image')->transport = 'postMessage';
-
-    /**
-     * Blocos para incrementar o layout
-     * block1-3__text
-     */
-
-    $wp_customize->add_setting('block1-3__text', array(
-        'default'           => '',
-        'section'           => 'block1',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('block1-3__text')->transport = 'postMessage';
-
-    /**
-     * image from increment layout
-     */
-
-    $wp_customize->add_setting('block1-3__image', array(
-        'default'           => '',
-        'section'           => 'block1',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('block1-3__image')->transport = 'postMessage';
-    /**
-     * Blocos para incrementar o layout
-     * block2-3__text
-     */
-
-    $wp_customize->add_setting('block2-3__text', array(
-        'default'           => '',
-        'section'           => 'block1',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('block2__text')->transport = 'postMessage';
-
-    /**
-     * image from complement company
-     */
-
-    $wp_customize->add_setting('block2-3__image', array(
-        'default'           => '',
-        'section'           => 'block1',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('block2-3__image')->transport = 'postMessage';
-    /**
-     * Blocos para incrementar o layout
-     * block2-3__text
-     */
-
-    $wp_customize->add_setting('block3-3__text', array(
-        'default'           => '',
-        'section'           => 'block1',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('block3__text')->transport = 'postMessage';
-
-    /**
-     * image from inclement company
-     */
-
-    $wp_customize->add_setting('block3-3__image', array(
-        'default'           => '',
-        'section'           => 'block1',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-
-
-    $wp_customize->get_setting('block3-3__image')->transport = 'postMessage';
-
-
-    /**
-     * Titulo compromisso
-     * section: commitment
-     * name: commitment_title
-     */
-
-    $wp_customize->add_setting('commitment_title', array(
+    $wp_customize->add_setting('home_title', array(
         'default'           => '',
         'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment'
-    ));
-
-    $wp_customize->get_setting('commitment_title')->transport = 'postMessage';
-
-    /**
-     * Imagem compromisso da empresa
-     * section: commitment
-     * name: commitment_image
-     */
-
-    $wp_customize->add_setting('commitment_image', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment'
-    ));
-
-    $wp_customize->get_setting('commitment_image')->transport = 'postMessage';
-
-    /**
-     * Blocos de compromisso
-     * section: commitment_blocks
-     * name: commitment_blocks_1
-     */
-
-    $wp_customize->add_setting('commitment_blocks_1', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment_blocks'
-    ));
-    $wp_customize->get_setting('commitment_blocks_1')->transport = 'postMessage';
-    $wp_customize->add_setting('commitment_blocks_1_image', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment_blocks'
-    ));
-    $wp_customize->get_setting('commitment_blocks_1_image')->transport = 'postMessage';
-
-    /**
-     * Blocos de compromisso
-     * section: commitment_blocks
-     * name: commitment_blocks_1
-     */
-
-    $wp_customize->add_setting('commitment_blocks_2', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment_blocks'
-    ));
-    $wp_customize->get_setting('commitment_blocks_2')->transport = 'postMessage';
-    $wp_customize->add_setting('commitment_blocks_2_image', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment_blocks'
-    ));
-    $wp_customize->get_setting('commitment_blocks_2_image')->transport = 'postMessage';
-    /**
-     * Blocos de compromisso
-     * section: commitment_blocks
-     * name: commitment_blocks_3
-     */
-
-    $wp_customize->add_setting('commitment_blocks_3', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment_blocks'
-    ));
-    $wp_customize->get_setting('commitment_blocks_3')->transport = 'postMessage';
-    $wp_customize->add_setting('commitment_blocks_3_image', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'commitment_blocks'
-    ));
-    $wp_customize->get_setting('commitment_blocks_3_image')->transport = 'postMessage';
-
-    //jobs_2
-    $wp_customize->add_setting('jobs_2', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'jobs_2'
-    ));
-
-    $wp_customize->get_setting('Jobs')->transport = 'postMessage';
-
-    /**
-     * Shop description
-     * section: shop
-     * name: shop_description
-     */
-    $wp_customize->add_setting('shop', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'shop'
-    ));
-
-    $wp_customize->get_setting('shop')->transport = 'postMessage';
-    /**
-     * Shop link
-     * section: shop
-     * name: shop_link
-     */
-    $wp_customize->add_setting('shop_link', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'shop'
-    ));
-
-    $wp_customize->get_setting('shop_link')->transport = 'postMessage';
-    /**
-     * Shop image
-     * section: shop
-     * name: shop_image
-     */
-    $wp_customize->add_setting('shop_image', array(
-        'default'           => '',
-        'sanitize_callback' => 'wp_kses_post',
-        'section'           => 'shop'
-    ));
-
-    $wp_customize->get_setting('shop_image')->transport = 'postMessage';
-
-    /**
-     * Gallery of partners
-     */
-    $wp_customize->add_setting('featured_image_gallery', array(
-        'default' => array(),
-        'sanitize_callback' => 'wp_parse_id_list',
     ));
 
     /**
-     * Contato
-     * section: contact
-     * Informações de contato da empresa
-     * settings: contact_mail, contact_cell, contact_phone
+     * Home page title
+     * section: home_title
      */
-    $wp_customize->add_setting('contact_mail', array(
-        'default' => '',
-        'section' => 'contacto',
+    $wp_customize->add_setting('home_question', array(
+        'default'           => '',
+        'section'           => 'home_title',
         'sanitize_callback' => 'wp_kses_post',
     ));
-    $wp_customize->add_setting('contact_cell', array(
-        'default' => '',
-        'section' => 'contacto',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-    $wp_customize->add_setting('contact_phone', array(
-        'default' => '',
-        'section' => 'contacto',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
+
     /**
-     * Redes sociais
-     * panel: panel_home
-     * Informações de contato da empresa
-     * section: social_net
-     * settings: social_facebook, social_instagram, social_youtube
+     * Page select to control parental
+     * section: home_title
      */
-    $wp_customize->add_setting('social_facebook', array(
-        'default' => '',
-        'section' => 'social_net',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-    $wp_customize->add_setting('social_instagram', array(
-        'default' => '',
-        'section' => 'social_net',
-        'sanitize_callback' => 'wp_kses_post',
-    ));
-    $wp_customize->add_setting('social_youtube', array(
-        'default' => '',
-        'section' => 'social_net',
+    $wp_customize->add_setting('page_to_yes', array(
+        'default'           => '',
+        'section'           => 'home_title',
         'sanitize_callback' => 'wp_kses_post',
     ));
 }
@@ -456,17 +81,46 @@ add_action('customize_register', 'rmb_customize_settings');
 function rmb_custom_controls($wp_customize)
 {
 
-    $wp_customize->add_control(new Skyrocket_TinyMCE_Custom_control($wp_customize, 'header_title', array(
-        'label' => __('História da Empresa'),
+    $wp_customize->add_control(new Skyrocket_TinyMCE_Custom_control($wp_customize, 'home_title', array(
+        'label' => __('Texto destaque home'),
         'type' => 'textarea',
-        'description' => __('Conte um pouco sobre a história da empresa'),
-        'section'    => 'header_title',
-        'settings'   => 'header_title',
+        'description' => __('Informe um titulo em destaque na homepage'),
+        'section'    => 'home_title',
+        'settings'   => 'home_title',
         'input_attrs' => array(
             'toolbar1' => 'undo redo formatselect bold italic fontsizeselect forecolor bullist numlist alignleft aligncenter alignright link',
             'mediaButtons' => true,
         )
     )));
+
+    /**
+     * Pergunta controle parental
+     * settings: home_question
+     */
+
+    $wp_customize->add_control(new Skyrocket_TinyMCE_Custom_control($wp_customize, 'home_question', array(
+        'label' => __('Controle parental'),
+        'type' => 'textarea',
+        'description' => __('Informe uma mensagem para o controle parental'),
+        'section'    => 'home_title',
+        'input_attrs' => array(
+            'toolbar1' => 'undo redo formatselect bold italic fontsizeselect forecolor bullist numlist alignleft aligncenter alignright link',
+            'mediaButtons' => true,
+        )
+    )));
+
+    /**
+     * Select page of control parental
+     * settings: page_to_yes
+     */
+    //add control
+    $wp_customize->add_control('page_to_yes', array(
+        'label' => 'Selecione a página',
+        'description' => __('Informe para qual página o usuário será redirecionado ao confirmar o controle parental'),
+        'type'  => 'dropdown-pages',
+        'section' => 'home_title',
+        'settings' => 'page_to_yes'
+    ));
 
     /**
      * Control type media
@@ -713,6 +367,7 @@ function rmb_custom_controls($wp_customize)
      */
     $wp_customize->add_control('commitment_blocks_3', array(
         'type' => 'textarea',
+        'settings' => 'commitment_blocks_3',
         'section' => 'commitment_blocks', // // Add a default or your own section
         'label' => __('Descrição terceiro bloco de compromisso'),
         'description' => __('Informe uma descrição ao terceiro bloco compromisso.'),

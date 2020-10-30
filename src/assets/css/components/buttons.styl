@@ -1,26 +1,68 @@
-.rmb-btn
-    width 147px
-    height 35px
-    border-radius 3px
-    display flex
-    justify-content center
-    align-items center
-    border 1px solid transparent
-    text-decoration none
-    font-family Overpass
-    font-size 16px
-    font-weight 600
-    font-stretch normal
-    font-style normal
-    line-height 1.25
-    letter-spacing normal
-    text-align left
-    &:hover
-        text-decoration none
-    &.rmb-btn-primary
-        background-color #2dccc7
-        color #fff
+.btn
+    font-family SpaceGrotesk
+    max-width 100%
+    
+
+    &-rose
+        background-color color4
+        color white
+        font-size 1.7rem
+        font-weight bold
+        font-stretch normal
+        font-style normal
+        line-height 1.1
+        border 1px solid transparent
+        border-radius 5px
+        padding 25px 60px
+
+        @media screen and (min-width 600px)
+            padding 25px 130px
+
         &:hover
-            background-color #fff
-            color #2dccc7
-            border-color #000
+            background-color color3
+            color color4
+            border-color color4
+
+    &-rose-clean
+        background-color color3
+        color color4
+        font-size 1.7rem
+        font-weight bold
+        font-stretch normal
+        font-style normal
+        line-height 1.1
+        border 1px solid color4
+        border-radius 5px
+        padding 25px 60px
+
+        @media screen and (min-width 600px)
+            padding 25px 130px
+
+        &:hover
+            background-color color4
+            color white
+            border-color color1
+
+    &-purple
+        background-color color1
+        color white
+        font-size 1.7rem
+        font-weight bold
+        font-stretch normal
+        font-style normal
+        line-height 1.1
+        border 1px solid transparent
+        border-radius 5px
+        padding 25px 60px
+
+        @media screen and (min-width 600px)
+            padding 25px 130px
+
+        &:hover
+            background-color color3
+            color color1
+            border-color color1
+
+    &.btn-small
+        padding 10px 30px
+        max-width 100%
