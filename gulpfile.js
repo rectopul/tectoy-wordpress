@@ -21,6 +21,8 @@ var config = {
     style: {
         in: 'src/assets/css',
         out: 'wp-content/themes/' + package.theme + '/assets/css',
+        dashIn: 'src/assets/dashboard',
+        dashOut: 'wp-content/themes/' + package.theme + '/assets/css/admin',
     },
     vendor: {
         in: 'src/vendor',
@@ -91,6 +93,26 @@ function copy() {
     const vendor = src(config.vendor.in + '/**/*').pipe(dest(config.vendor.out))
 
     return merge(normal, frameworks, vendor, scripts)
+}
+
+// Styles Dashboard
+function stylesDashboard() {
+    return src([config.style.dashIn + '/**/*.styl'])
+        .pipe(sourcemaps.init())
+        .pipe(
+            stylus({
+                'include css': true,
+                use: [autoprefixer('iOS >= 7', 'last 1 Chrome version')],
+                compress: true,
+                linenos: true,
+                import: __dirname + '/src/assets/css/app.styl',
+            })
+        )
+        .pipe(rename('admin.css'))
+        .pipe(concat('admin.css'))
+        .pipe(sourcemaps.write())
+        .pipe(dest(config.style.dashOut))
+        .on('error', console.log)
 }
 
 // Styles
@@ -210,7 +232,7 @@ const url = `http://localhost:8003` // Change me
 function startTask(done) {
     server.init(
         {
-            baseDir: "./"
+            baseDir: './',
         },
         done
     )
@@ -221,6 +243,7 @@ function watchTask() {
     watch('./src/assets/css/**/*.styl', series(styles))
     watch(config.image.in + '/**/*.{jpg,png}', series(images))
     watch(config.svg.in + '/**/*.svg', series(svg))
+    watch('./src/assets/dashboard/**/*.styl', series(stylesDashboard))
     watch(
         [
             'src/**/*.{php,jpg,jpeg,png,svg,css}',

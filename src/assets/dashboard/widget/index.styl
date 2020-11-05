@@ -1,0 +1,64 @@
+.widget
+    &__video
+
+        &--subscribers
+            //flex 0 0 100%
+            padding 0
+            margin 0
+            display flex
+            max-height 0
+            overflow hidden
+
+            &, ul
+                background-color transparent
+
+            li
+                display flex
+                flex-wrap wrap
+
+                strong
+                    margin-right 8px
+                    &:not(:first-child)
+                        margin-left 20px
+
+                span
+                    display flex
+
+        &--votes
+            display flex
+            margin-left 10px
+            align-items center
+
+            color #23282d
+            font-size: 14px
+            font-weight: 600
+
+            strong
+                margin-left 8px
+                font(SpaceGrotesk, 1rem, bold, white, 1, center)
+                display flex
+                justify-content center
+                align-items center
+                padding 5px
+                background-color color1
+                width 20px 
+                height 20px
+                border-radius 3px
+        
+        &--item
+
+            cursor pointer
+
+            .event-info
+                display flex
+                align-items center
+                max-width 100%
+                flex-wrap wrap
+
+            .event-info-inner
+                margin-left 10px
+
+            &.show
+                .widget__video--subscribers
+                    max-height initial
+                    margin 15px 0

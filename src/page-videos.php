@@ -15,10 +15,19 @@ get_header(); ?>
     <div class="container">
         <div class="row">
             <!-- Title -->
-            <div class="col-md-6">
-                <?php the_title('<h2>', '</h2>'); ?>
+            <div class="col-md-auto">
+                <?php the_content(); ?>
+            </div>
+
+
+            <!-- filter -->
+            <div class="col-md text-right">
+
             </div>
         </div>
+
+        <!-- loop -->
+        <?php get_template_part('template-parts/content', 'videos'); ?>
     </div>
 </div>
 

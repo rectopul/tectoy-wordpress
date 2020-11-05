@@ -10,35 +10,24 @@
 
 get_header(); ?>
 
-<div class="container-fluid bg-rose py-5">
+<div class="container-fluid bg-rose">
 
     <div class="container">
         <div class="row">
             <!-- Title -->
-            <div class="col-md-6">
-                <?php the_title('<h2>', '</h2>'); ?>
+            <div class="col-md-auto">
+                <?php the_content(); ?>
+            </div>
+
+
+            <!-- filter -->
+            <div class="col-md text-right">
+
             </div>
         </div>
 
         <!-- loop -->
-
-        <div class="row mt-5 video__list">
-            <!-- loop -->
-            <?php while (have_posts()) : the_post(); ?>
-
-                <li class="col-md-3 my-5">
-                    <figure class="post__image">
-                        <?php the_content(); ?>
-                    </figure>
-                    <button class="like-video btn btn-small btn-rose my-2">Gostei</button>
-                    <h3><?php the_excerpt(); ?></h3>
-                    <h4><?php the_title(); ?></h4>
-                </li>
-
-            <?php endwhile; ?>
-
-            <!-- /loop -->
-        </div>
+        <?php get_template_part('template-parts/content', 'videos'); ?>
     </div>
 </div>
 

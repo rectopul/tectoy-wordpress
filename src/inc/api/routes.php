@@ -1,6 +1,100 @@
 <?php
 
 /**
+ * Voting system
+ * system of vote in api rest
+ */
+
+add_action('rest_api_init', 'register_vote_api_hooks');
+
+function register_vote_api_hooks()
+{
+    register_rest_route(
+        'v1',
+        '/voting/(?P<id>\d+)',
+        array(
+            'methods'  => 'GET',
+            'callback' => 'voting',
+        )
+    );
+}
+
+function hasAlreadyVoted($post_id, $user_email)
+{
+    // Retrieve post votes IPs
+    $meta_user = get_post_meta($post_id, "voted_user");
+    $voted_user = $meta_user[0];
+
+    if (!is_array($voted_user))
+        $voted_user = array();
+
+
+    // If user has already voted
+    if (in_array($user_email, array_keys($voted_user))) return true;
+
+    return false;
+}
+
+function voting($request)
+{
+    $video_id = $request['id'];
+
+    $error = new WP_Error();
+
+    $video = get_post($video_id);
+
+    if ($video->post_type != "video") {
+        $error->add(400, __("Tipo de voto inválido, por favor selecione um vídeo", 'wp-rest-user'), array('status' => 400));
+        return $error;
+    }
+
+
+    // Get voters'IPs for the current post
+    $meta_user = get_post_meta($video_id, "voted_user");
+    $voted_user = $meta_user[0];
+
+    if (!is_array($voted_user))
+        $voted_user = [];
+
+    // Get votes count for the current post
+    $meta_count = get_post_meta($video_id, "votes_count", true);
+
+    if (is_user_logged_in()) {
+        $current_user = wp_get_current_user();
+
+        $user = [];
+
+        $user['ID'] = $current_user->ID;
+        $user['user_email'] = $current_user->user_email;
+
+
+
+        // Use has already voted ?
+        if (hasAlreadyVoted($video_id, $user['user_email'])) {
+            $voted_user[$user['user_email']] = [
+                'date' => new DateTime(null, new DateTimeZone('America/Sao_Paulo')),
+                'vote' => ++$voted_user[$user['user_email']]['vote']
+            ];
+        } else {
+            $voted_user[$user['user_email']] = [
+                'date' => new DateTime(null, new DateTimeZone('America/Sao_Paulo')),
+                'vote' => 1
+            ];
+        }
+
+        // Save IP and increase votes count
+        update_post_meta($video_id, "voted_user", $voted_user);
+        update_post_meta($video_id, "votes_count", ++$meta_count);
+
+        return 'Você votou no vídeo ' . $video->post_title;
+    } else {
+
+        $error->add(400, __("User not logged in", 'wp-rest-user'), array('status' => 400));
+        return $error;
+    }
+}
+
+/**
  * Authentication
  * Parâmetros de autenticação da api
  */

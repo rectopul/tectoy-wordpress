@@ -20,7 +20,16 @@ get_header(); ?>
                 <article class="my-3"><?php the_content(); ?></article>
 
                 <footer class="mt-5">
-                    <a href="" class="btn btn-rose" data-toggle="modal" data-target="#loginModal">Votar agora</a>
+                    <?php
+                    $link = get_permalink(get_page_by_path('videos'));
+
+                    if (is_user_logged_in()) :
+                    ?>
+                        <a href="<?php echo $link; ?>" class="btn btn-rose">Votar agora</a>
+
+                    <?php else : ?>
+                        <a href="" class="btn btn-rose" data-toggle="modal" data-target="#registerModal">Votar agora</a>
+                    <?php endif; ?>
                 </footer>
             </div>
 

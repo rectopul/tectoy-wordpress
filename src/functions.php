@@ -250,6 +250,22 @@ function rmb_register_styles()
 
 add_action('wp_enqueue_scripts', 'rmb_register_styles');
 
+function rmb_register_admin()
+{
+    wp_register_style('custom_wp_admin_css', get_template_directory_uri() . '/assets/css/admin/admin.css', false, '1.0.0');
+    wp_enqueue_style('custom_wp_admin_css');
+
+    wp_enqueue_script(
+        'custom_wp_admin_js',
+        get_template_directory_uri() . '/js/admin.js',
+        array('jquery'),
+        '2.0',
+        true
+    );
+}
+
+add_action('admin_enqueue_scripts', 'rmb_register_admin');
+
 
 /**
  * Implement get theme mods.
@@ -384,6 +400,15 @@ add_filter('wp_nav_menu_objects', 'wpb_first_and_last_menu_class');
  * GET Routes of api
  */
 require_once get_template_directory() . '/inc/api/routes.php';
+//facebook login
+require_once get_template_directory() . '/inc/api/facebookLogin.php';
+
+add_action('wp', array('FB_Login', 'check'));
+
+/**
+ * Widgets Dashboards
+ */
+require_once get_template_directory() . '/inc/widgets/votes.php';
 
 
 
