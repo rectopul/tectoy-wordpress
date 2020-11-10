@@ -25,7 +25,7 @@
             printf(
                 '<div class="videos__item col-md-3 %s" data-id"%s">
                         <figure>%s<span class="video__show" data-id="%s" data-toggle="modal" data-target="#videoModal">%s</span></figure>
-                        <a href="%s">Gostei %s</a>
+                        <a href="#" data-id="%s">Gostei %s</a>
                         <h5>@%s</h5>
                         <h4>%s</h4>
                     </div>',
@@ -34,7 +34,7 @@
                 apply_filters('the_content', get_the_content()),
                 get_the_ID(),
                 get_svg_sprite('youtube'),
-                get_permalink(),
+                get_the_ID(),
                 get_svg_sprite('core'),
                 get_field("insta_author"),
                 get_the_title()

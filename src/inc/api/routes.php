@@ -68,7 +68,6 @@ function voting($request)
         $user['user_email'] = $current_user->user_email;
 
 
-
         // Use has already voted ?
         if (hasAlreadyVoted($video_id, $user['user_email'])) {
             $voted_user[$user['user_email']] = [
@@ -175,6 +174,12 @@ function wc_rest_user_endpoint_handler($request = null)
 
             //Set name and surname
             wp_update_user($userdata);
+
+            //login User
+            $user_id = $user->ID;
+
+            // … códigos do método login
+            wp_set_auth_cookie($user_id);
             // Ger User Data (Non-Sensitive, Pass to front end.)
             $response['code'] = 200;
 
@@ -185,7 +190,7 @@ function wc_rest_user_endpoint_handler($request = null)
         }
     } else {
 
-        $error->add(406, __("Email already exists, please try 'Reset Password'", 'wp-rest-user'), array('status' => 400));
+        $error->add(406, __("Você já é cadastrado, Faça o login", 'wp-rest-user'), array('status' => 400));
 
         return $error;
     }
@@ -217,16 +222,48 @@ function register_api_hooks()
 
 function login($request)
 {
-    $creds = array();
-    $creds['user_login'] = $request["username"];
-    $creds['user_password'] =  $request["password"];
-    $creds['remember'] = true;
-    $user = wp_signon($creds, false);
+    $error = new WP_Error();
+    $email = $request["email"];
+    $whatsapp = $request["whatsapp"];
 
-    if (is_wp_error($user))
-        echo $user->get_error_message();
+    $response = array();
 
-    return $user;
+    if (empty($email)) {
+        $error->add(400, __("Username field 'email' is required.", 'wp-rest-user'), array('status' => 400));
+        return $error;
+    }
+
+    if (empty($whatsapp)) {
+        $error->add(400, __("Username field 'whatsapp' is required.", 'wp-rest-user'), array('status' => 400));
+        return $error;
+    }
+
+
+    $user_wp = get_user_by('email', $email);
+
+    if ($user_wp->roles[0] == 'administrator') {
+        $error->add(400, __("Não é possível logar como administrador nesta página.", 'wp-rest-user'), array('status' => 400));
+        return $error;
+    }
+
+    //login User
+    $user_id = $user_wp->ID;
+
+    // … códigos do método login
+    wp_set_auth_cookie($user_id);
+
+    $response['message'] = $user_wp;
+
+    $response['code'] = 200;
+
+    if (is_wp_error($user)) {
+        $error->add(400, __($user->get_error_message(), 'wp-rest-user'), array('status' => 400));
+        return $error;
+    }
+
+    return new WP_REST_Response($response, 200);
+
+    //return $user;
 }
 
 add_action('after_setup_theme', 'custom_login');

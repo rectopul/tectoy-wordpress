@@ -80,6 +80,27 @@
     const user = (() => {
         //private var/functions
 
+        function handleRequestLogin(data) {
+            return new Promise((resolve, reject) => {
+                data.password = btoa(data.whatsapp)
+
+                fetch(`/wp-json/v1/login`, {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then((r) => r.json())
+                    .then((res) => {
+                        if (res.error || res.code != 200) return reject(res)
+
+                        return resolve(res)
+                    })
+                    .catch(reject)
+            })
+        }
+
         //Register Request
         function handleRequestRegister(data) {
             return new Promise((resolve, reject) => {
@@ -101,6 +122,42 @@
                         return resolve(res)
                     })
                     .catch(reject)
+            })
+        }
+
+        function sigIn(selector) {
+            const form = document.querySelector(selector)
+
+            if (!form) return
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault()
+
+                try {
+                    const data = util.serialize(form)
+
+                    if (!data) return
+
+                    await handleRequestLogin(data)
+
+                    const modal = form.closest('.modal')
+
+                    console.log(modal)
+
+                    $(modal).modal('hide')
+
+                    $(modal).on('hidden.bs.modal', function (e) {
+                        // do something...
+                        util.notify(`success`, 'Usuário logado com sucesso!')
+
+                        window.location.href = `/videos/`
+
+                        $(this).off('hidden.bs.modal')
+                    })
+                } catch (error) {
+                    util.notify(`warning`, error.message)
+                    console.log(`erro: `, error)
+                }
             })
         }
 
@@ -129,6 +186,8 @@
                         // do something...
                         util.notify(`success`, 'Usuário ' + user.message.user_email + ' criado com sucesso!')
 
+                        window.location.href = `/videos/`
+
                         $(this).off('hidden.bs.modal')
                     })
                 } catch (error) {
@@ -141,10 +200,12 @@
         return {
             //public var/functions
             signUp,
+            sigIn,
         }
     })()
 
-    user.signUp(`.modal-login__form`)
+    user.signUp(`.modal-register__form`)
+    user.sigIn(`.modal-login__form`)
 
     /**
      * Vote system
@@ -207,6 +268,35 @@
             })
         }
 
+        function voting(selector) {
+            const btnVoting = [...document.querySelectorAll(selector)]
+
+            if (btnVoting) {
+                btnVoting.forEach((btn) => {
+                    btn.addEventListener('click', async function (e) {
+                        e.preventDefault()
+
+                        try {
+                            const id = btn.dataset.id
+
+                            if (!id) return util.notify('warning', 'Nenhum video selecionado')
+
+                            await handleVoting(id)
+
+                            //btn.disabled = true
+
+                            btn.classList.add('voted')
+
+                            return util.notify('success', 'Obrigado pelo seu voto')
+                        } catch (error) {
+                            console.log(error)
+                            return util.notify('warning', error.message)
+                        }
+                    })
+                })
+            }
+        }
+
         function openVoteModal(selector) {
             const item = [...document.querySelectorAll(selector)]
 
@@ -248,8 +338,11 @@
             //public var/functions
             openVoteModal,
             btnVoting,
+            voting,
         }
     })()
+
+    video.voting('.videos__item.col-md-3 > a')
 
     video.btnVoting('.btn-vote')
     video.openVoteModal('.video__show')
