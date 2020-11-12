@@ -7,7 +7,7 @@ services:
         expose:
             - 3306
         networks:
-            - volker
+            - tectoy
         environment:
             MYSQL_ROOT_PASSWORD: wordpress
             MYSQL_DATABASE: wordpress
@@ -23,10 +23,10 @@ services:
         expose:
             - 80
         networks:
-            - volker
+            - tectoy
             - nginx-proxy
         environment:
-            VIRTUAL_HOST: volker.localhost
+            VIRTUAL_HOST: tectoy.localhost
             WORDPRESS_DB_HOST: db:3306
             WORDPRESS_DB_USER: wordpress
             WORDPRESS_DB_PASSWORD: wordpress
@@ -38,10 +38,10 @@ services:
         expose:
             - 80
         networks:
-            - volker
+            - tectoy
             - nginx-proxy
         environment:
-            VIRTUAL_HOST: phpmyadmin.volker.localhost
+            VIRTUAL_HOST: phpmyadmin.tectoy.localhost
             PMA_USERNAME: wordpress
             PMA_PASSWORD: wordpress
             PMA_HOSTS: db
@@ -51,7 +51,7 @@ volumes:
     db_data:
 
 networks:
-    volker:
+    tectoy:
     nginx-proxy:
         external:
             name: proxy_default

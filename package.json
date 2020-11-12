@@ -1,6 +1,6 @@
 {
-    "name": "volker",
-    "theme": "volker",
+    "name": "tectoy",
+    "theme": "tectoy",
     "version": "1.0.0",
     "description": "Theme Default",
     "main": "gulpfile.js",

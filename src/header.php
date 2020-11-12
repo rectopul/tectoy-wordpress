@@ -36,6 +36,8 @@
 
         <div class="template-header container-fluid">
 
+            <?php echo get_svg_sprite('core'); ?>
+
             <header class="container">
                 <div class="row">
                     <!-- Nav // -->
