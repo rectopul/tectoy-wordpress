@@ -55,28 +55,13 @@ get_header(); ?>
 				<a href="<?php companyLink(); ?>" class="button-orange">SAIBA MAIS</a>
 			</div>
 			<div class="col-lg-6 col-sm-6 col-xs-12 image text-right">
-				<img src="<?php bloginfo('template_url'); ?>/images/sobre.png" alt="Sobre a Tectoy" />
+				<?php company_image(); ?>
 			</div>
 		</div>
 
 		<ul class="row valores">
 			<h1 class="col-lg-12 col-sm-12 col-xs-12 text-center">VALORES</h1>
-			<li class="col-lg-3 col-sm-3 col-xs-6">
-				<img src="<?php bloginfo('template_url'); ?>/images/valores1.png" alt="Honestidade empresarial" />
-				<p>Honestidade empresarial, cumprindo toda a legislação aplicável ao negócio.</p>
-			</li>
-			<li class="col-lg-3 col-sm-3 col-xs-6">
-				<img src="<?php bloginfo('template_url'); ?>/images/valores2.png" alt="Competência profissional" />
-				<p>Competência profissional, aumentando a capacidade do nosso pessoal.</p>
-			</li>
-			<li class="col-lg-3 col-sm-3 col-xs-6">
-				<img src="<?php bloginfo('template_url'); ?>/images/valores3.png" alt="Participação dos colaboradores" />
-				<p>Participação dos colaboradores, envolvimento de nosso pessoal na execução de suas atividades.</p>
-			</li>
-			<li class="col-lg-3 col-sm-3 col-xs-6">
-				<img src="<?php bloginfo('template_url'); ?>/images/valores4.png" alt="Parceria e comprometimento" />
-				<p>Parceria e comprometimento, adotando uma relação de clareza com nossos fornecedores e clientes.</p>
-			</li>
+			<?php get_template_part('template-parts/content', 'posts'); ?>
 		</ul>
 	</div>
 	<!-- /bloco Institucional - Sobre Nós -->
@@ -88,13 +73,13 @@ get_header(); ?>
 			<h1 class="col-lg-12 col-sm-12 col-xs-12 text-center">CONHEÇA TAMBÉM</h1>
 			<li class="col-lg-6 col-sm-6 col-xs-12">
 				<a href="">
-					<div class="image"><img src="<?php bloginfo('template_url'); ?>/images/conheca1.png" alt="TECTOY SUNMI" /></div>
+					<div class="image"><?php min_banner_1(); ?></div>
 					<h2>TECTOY SUNMI</h2>
 				</a>
 			</li>
 			<li class="col-lg-6 col-sm-6 col-xs-12">
 				<a href="">
-					<div class="image"><img src="<?php bloginfo('template_url'); ?>/images/conheca2.png" alt="Lojas Físicas" /></div>
+					<div class="image"><?php min_banner_2(); ?></div>
 					<h2>Lojas Físicas</h2>
 				</a>
 			</li>
@@ -109,28 +94,19 @@ get_header(); ?>
 			<h1 class="col-lg-12 col-sm-12 col-xs-12 text-center">Vídeos</h1>
 			<li class="col-lg-4 col-sm-4 col-xs-12">
 				<div class="video">
-					<div class="thumb">
-						<img src="<?php bloginfo('template_url'); ?>/images/video1.png" />
-					</div>
-					<iframe width="420" height="240" src="https://www.youtube.com/embed/d3Vrv72ZYpU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<?php video_1(); ?>
 				</div>
 				<p>Uma nova Frase</p>
 			</li>
 			<li class="col-lg-4 col-sm-4 col-xs-12">
 				<div class="video">
-					<div class="thumb">
-						<img src="<?php bloginfo('template_url'); ?>/images/video2.png" />
-					</div>
-					<iframe width="420" height="240" src="https://www.youtube.com/embed/d3Vrv72ZYpU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<?php video_2(); ?>
 				</div>
 				<p>Lançamento do Celular da Tectoy</p>
 			</li>
 			<li class="col-lg-4 col-sm-4 col-xs-12">
-				<div class="video play">
-					<div class="thumb">
-						<img src="<?php bloginfo('template_url'); ?>/images/video3.png" />
-					</div>
-					<iframe width="420" height="240" src="https://www.youtube.com/embed/d3Vrv72ZYpU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<div class="video">
+					<?php video_3(); ?>
 				</div>
 				<p>The Sound is On</p>
 			</li>

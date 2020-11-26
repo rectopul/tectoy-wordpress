@@ -52,6 +52,26 @@ function all_partials($wp_customize)
         ]
     );
 
+    $wp_customize->selective_refresh->add_partial(
+        'min_banner_1',
+        [
+            'selector' => '.conheca > ul > li:nth-child(2) .image',
+            'render_callback' => 'min_banner_1',
+            'container_inclusive' => false,
+            'fallback_refresh' => false
+        ]
+    );
+
+    $wp_customize->selective_refresh->add_partial(
+        'min_banner_2',
+        [
+            'selector' => '.conheca > ul > li:nth-child(3) .image',
+            'render_callback' => 'min_banner_2',
+            'container_inclusive' => false,
+            'fallback_refresh' => false
+        ]
+    );
+
     require_once get_template_directory() . '/inc/custom/callbacks.php';
 }
 

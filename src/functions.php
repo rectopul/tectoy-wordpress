@@ -66,9 +66,9 @@ function rmb_theme_setup_support()
     add_image_size('post_category', 410, 231);
     add_image_size('project_thumb', 650, 462, true);
     add_image_size('project_preview', 728, 463);
-    add_image_size('view_large', 710, 420, true);
-    add_image_size('categories', 630, 365, true);
-    add_image_size('product_small', 198, 198, false);
+    add_image_size('mini_banner', 640, 420, true);
+    add_image_size('image_medium', 550, 400, true);
+    add_image_size('post_image', 310, 200, true);
     // Custom logo.
     $logo_width  = 120;
     $logo_height = 90;
@@ -299,6 +299,7 @@ require_once get_template_directory() . '/inc/custom/settings.php';
 require_once get_template_directory() . '/inc/custom/control.php';
 require_once get_template_directory() . '/inc/custom/callbacks.php';
 require_once get_template_directory() . '/inc/custom/partials.php';
+require_once get_template_directory() . '/inc/custom/posts.php';
 
 /**
  * Stick custom post

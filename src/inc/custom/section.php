@@ -42,5 +42,29 @@ function all_customize_sections($wp_customize)
         'priority' => 2,
         'panel'            => 'panel_home'
     ));
+
+    $wp_customize->add_section('min_banner_1', array(
+        'title'    => __('Mini Banner - 1', 'auaha'),
+        'capability' => 'edit_theme_options',
+        'description' => __('Edite os Mini Banners'),
+        'priority' => 2,
+        'panel'            => 'panel_home'
+    ));
+
+    $wp_customize->add_section('min_banner_2', array(
+        'title'    => __('Mini Banner - 2', 'auaha'),
+        'capability' => 'edit_theme_options',
+        'description' => __('Edite os Mini Banners'),
+        'priority' => 2,
+        'panel'            => 'panel_home'
+    ));
+
+    $wp_customize->add_section('videos', array(
+        'title'    => __('Videos do rodapé', 'auaha'),
+        'capability' => 'edit_theme_options',
+        'description' => __('Edite os videos do rodapé'),
+        'priority' => 2,
+        'panel'            => 'panel_home'
+    ));
 }
 add_action('customize_register', 'all_customize_sections');

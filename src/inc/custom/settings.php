@@ -80,6 +80,51 @@ function all_customize_settings($wp_customize)
         'sanitize_callback' => 'wp_kses_post',
     ));
     $wp_customize->get_setting('about_company_link')->transport = 'postMessage';
+
+    $wp_customize->add_setting('about_company_image', array(
+        'default'           => '',
+        'section'           => 'about_company',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->get_setting('about_company_image')->transport = 'postMessage';
+
+    //min_banner_1
+
+    $wp_customize->add_setting('min_banner_1', array(
+        'default'           => '',
+        'section'           => 'min_banner_1',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->get_setting('min_banner_1')->transport = 'postMessage';
+
+    $wp_customize->add_setting('min_banner_2', array(
+        'default'           => '',
+        'section'           => 'min_banner_2',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->get_setting('min_banner_2')->transport = 'postMessage';
+
+
+    $wp_customize->add_setting('video_1', array(
+        'default'           => '',
+        'section'           => 'videos',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->get_setting('video_1')->transport = 'postMessage';
+
+    $wp_customize->add_setting('video_2', array(
+        'default'           => '',
+        'section'           => 'videos',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->get_setting('video_2')->transport = 'postMessage';
+
+    $wp_customize->add_setting('video_3', array(
+        'default'           => '',
+        'section'           => 'videos',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->get_setting('video_3')->transport = 'postMessage';
 }
 
 add_action('customize_register', 'all_customize_settings');
