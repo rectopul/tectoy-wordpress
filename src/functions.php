@@ -293,9 +293,12 @@ require_once get_template_directory() . '/inc/custom/posts.php';
  * Custom controls
  * taxonomies files
  */
-require_once get_template_directory() . '/inc/custom/control.php';
-require_once get_template_directory() . '/inc/custom/settings.php';
+require_once get_template_directory() . '/inc/custom/panel.php';
 require_once get_template_directory() . '/inc/custom/section.php';
+require_once get_template_directory() . '/inc/custom/settings.php';
+require_once get_template_directory() . '/inc/custom/control.php';
+require_once get_template_directory() . '/inc/custom/callbacks.php';
+require_once get_template_directory() . '/inc/custom/partials.php';
 
 /**
  * Stick custom post
