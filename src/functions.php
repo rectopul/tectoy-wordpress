@@ -239,8 +239,8 @@ function rmb_register_styles()
     //https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap
 
     wp_enqueue_style(
-        'google-Work-Sans',
-        'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet',
+        'google-montserrat',
+        'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap',
         false
     );
 
@@ -289,6 +289,13 @@ require get_template_directory() . '/inc/madison/functions.php';
  * taxonomies files
  */
 require_once get_template_directory() . '/inc/custom/posts.php';
+/**
+ * Custom controls
+ * taxonomies files
+ */
+require_once get_template_directory() . '/inc/custom/control.php';
+require_once get_template_directory() . '/inc/custom/settings.php';
+require_once get_template_directory() . '/inc/custom/section.php';
 
 /**
  * Stick custom post
@@ -366,34 +373,19 @@ function get_svg_sprite($name)
 }
 
 //add class in links menu
-function add_menuclass($ulclass)
+
+function add_specific_menu_location_atts($atts, $item, $args)
 {
-
-    return preg_replace('/<a /', '<a class="nav-link"', $ulclass);
-}
-
-add_filter('wp_nav_menu', 'add_menuclass');
-
-function add_additional_class_on_li($classes, $item, $args)
-{
-
-    if (isset($args->add_li_class)) {
-        $classes[] = $args->add_li_class;
+    // check if the item is in the primary menu
+    if ($args->theme_location == 'primary') {
+        // add the desired attributes:
+        $atts['class'] = 'nav-link';
     }
-    return $classes;
+    return $atts;
 }
-add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
+add_filter('nav_menu_link_attributes', 'add_specific_menu_location_atts', 10, 3);
 
-function wpb_first_and_last_menu_class($items)
-{
-    $items[1]->classes[] = 'first-menu-item'; // add first class
-    $cnt = count($items);
-    while ($items[$cnt--]->post_parent != 0); // find last li item
-    $items[$cnt + 1]->classes[] = 'button-pink'; // last item class
 
-    return $items;
-}
-add_filter('wp_nav_menu_objects', 'wpb_first_and_last_menu_class');
 
 
 /**
@@ -418,3 +410,35 @@ require_once get_template_directory() . '/inc/widgets/votes.php';
  * the form of register new users
  */
 require_once get_template_directory() . '/inc/register/functions.php';
+
+/**
+ * Add extra itens in menu
+ * 
+ */
+
+add_filter('wp_nav_menu_items', 'prefix_add_menu_item', 10, 2);
+/**
+ * Add Menu Item to end of menu
+ */
+function prefix_add_menu_item($items, $args)
+{
+
+    if ($args->theme_location == 'primary') {
+        $new_item       = array(
+            '<li class="nav-item"><a data-id="" class="button-orange nav-link " href="#">Loja Tectoy</a></li>',
+            '<li class="nav-item">
+                     <nav class="language">
+                         <a href="#" class="portugues"></a>
+                         <a href="#" class="espanhol"></a>
+                         <a href="#" class="ingles"></a>
+                    </nav>
+            </li>'
+        );
+        $items          = preg_replace('/<\/li>\s<li/', '</li>,<li',  $items);
+
+        $array_items    = explode(',', $items);
+        array_splice($array_items, count($array_items), 0, $new_item); // splice in at position 3
+        $items          = implode('', $array_items);
+    }
+    return $items;
+}

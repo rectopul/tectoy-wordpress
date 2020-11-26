@@ -1,4 +1,60 @@
-.template-footer
-    background-color color3
 
-    color color1
+footer
+    width 100%
+    height 200px
+    background #20242A
+    color #FFFFFF
+    a
+        color #FFF
+        font-size 14px
+        font-weight 500
+        line-height 26px
+
+.row
+    &.footer-menu
+        border-bottom 1px solid #000
+        padding 30px 0
+        margin-bottom 30px
+
+        font-family Montserrat
+
+        li > a
+            font-size 11px
+            font-weight 400
+            color white
+    &.copyright
+        p
+            font-size 12px
+            font-weight 400
+            color #FFFF
+
+.footer-menu
+    a
+        color #FFF
+
+nav
+    &.socials
+        display flex
+        justify-content flex-end
+        align-items center
+        a
+            width 18px
+            height 18px
+            margin-left 16px
+            display block
+            background-image url('../images/icn-sprite.png')
+            background-repeat no-repeat
+            &:first-child
+                margin-left 0
+        .facebook
+            background-position 3px -116px
+        .instagram
+            background-position -26px -116px
+        .linkedin
+            background-position -59px -116px
+        .twitter
+            background-position -93px -116px
+        .youtube
+            background-position -126px -116px
+        .rss
+            background-position -159px -116px

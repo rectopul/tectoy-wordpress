@@ -17,97 +17,171 @@
 
 <head>
 
-    <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="<?php bloginfo('charset'); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-    <?php wp_head(); ?>
+	<?php wp_head(); ?>
+
+	<script>
+		$(document).ready(function() {
+
+			$('.video').click(function() {
+				if ($(this).hasClass('play')) {
+					return false;
+				} else {
+					$(this).addClass('play');
+				}
+			});
+		});
+	</script>
 
 </head>
 
 <body <?php body_class(); ?>>
 
-    <?php
-    wp_body_open();
-    ?>
+	<script>
+		// 2. This code loads the IFrame Player API code asynchronously.
+		var tag = document.createElement('script');
 
-    <section class="content">
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        <div class="template-header container-fluid">
+		// 3. This function creates an <iframe> (and YouTube player)
+		//    after the API code downloads.
+		var player;
 
-            <?php echo get_svg_sprite('core'); ?>
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+				videoId: 'd3Vrv72ZYpU',
+				events: {
+					'onReady': function(e) {
 
-            <header class="container">
-                <div class="row">
-                    <!-- Nav // -->
-                    <nav class="navbar navbar-expand-lg navbar-dark col-12">
-                        <?php
-                        if (function_exists('the_custom_logo') && has_custom_logo()) {
-                            $custom_logo_id = get_theme_mod('custom_logo');
+						e.target.mute();
 
-                            $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+						e.target.setPlaybackQuality('hd1080');
 
-                            printf(
-                                '<a href="%s" class="navbar-brand"><img src="%s" alt="%s"></a>',
-                                get_bloginfo('url'),
-                                $logo[0],
-                                get_bloginfo('name')
-                            );
-                        } else {
-                            printf(
-                                '<a class="navbar-brand" href="%s">%s</a>',
-                                get_bloginfo('url'),
-                                get_bloginfo('name')
-                            );
-                        }
-                        ?>
-                        <!--
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Dropdown
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                                </li>
-                            </ul>
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </form>
-                        </div>
-                        -->
-                    </nav>
+					},
+					'onStateChange': function(e) {
 
-                </div>
-            </header>
+						if (e && e.data === 1) {
 
-        </div>
+							var videoHolder = document.getElementById('home-banner-box');
 
+							if (videoHolder && videoHolder.id) {
 
+								videoHolder.classList.remove('loading');
 
+							}
 
-        <?php
-        if (function_exists('yoast_breadcrumb')) {
-            yoast_breadcrumb('<div id="breadcrumbs" class="breadcrumbs container-fluid">', '</div>');
-        }
-        ?>
+						} else if (e && e.data === 0) {
+
+							e.target.playVideo()
+
+						}
+
+					}
+				},
+				playerVars: {
+					autoplay: 1,
+					autohide: 1,
+					disablekb: 1,
+					controls: 0,
+					showinfo: 0,
+					modestbranding: 1,
+					loop: 1,
+					fs: 0,
+					autohide: 0,
+					rel: 0,
+					enablejsapi: 1
+				}
+			});
+		}
+
+		// 4. The API will call this function when the video player is ready.
+		function onPlayerReady(event) {
+			event.target.playVideo();
+		}
+
+		// 5. The API calls this function when the player's state changes.
+		//    The function indicates that when playing a video (state=1),
+		//    the player should play for six seconds and then stop.
+		var done = false;
+
+		function onPlayerStateChange(event) {
+			if (event.data == YT.PlayerState.PLAYING && !done) {
+				setTimeout(stopVideo, 6000);
+				done = true;
+			}
+		}
+
+		function stopVideo() {
+			player.stopVideo();
+		}
+	</script>
+
+	<?php
+	wp_body_open();
+	?>
+
+	<section class="content">
+
+		<!-- header -->
+		<header>
+			<div class="container">
+
+				<nav class="row navbar navbar-light navbar-expand-lg justify-content-lg-between">
+					<button class="navbar-toggler col-xs-2 " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<?php
+					if (function_exists('the_custom_logo') && has_custom_logo()) {
+						$custom_logo_id = get_theme_mod('custom_logo');
+
+						$logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+
+						printf(
+							'<a href="%s" class="navbar-brand"><img src="%s" alt="%s"></a>',
+							get_bloginfo('url'),
+							$logo[0],
+							get_bloginfo('name')
+						);
+					} else {
+						printf(
+							'<a class="navbar-brand" href="%s">%s</a>',
+							get_bloginfo('url'),
+							get_bloginfo('name')
+						);
+					}
+					?>
+
+					<?php
+					if (has_nav_menu('primary')) {
+
+						wp_nav_menu(array(
+							'theme_location' => 'primary',
+							'depth' => 2,
+							'container' => 'div',
+							'container_class' => 'collapse navbar-collapse col-lg-11 col-xs-12 justify-content-end',
+							'container_id' => 'navbarSupportedContent',
+							'menu_class' => 'navbar-nav',
+							'add_li_class' => 'nav-item'
+						));
+					} elseif (!has_nav_menu('expanded')) {
+
+						wp_list_pages(
+							array(
+								'match_menu_classes' => true,
+								'show_sub_menu_icons' => true,
+								'title_li' => false,
+							)
+						);
+					}
+					?>
+				</nav>
+			</div>
+		</header>
+		<!-- /header -->
