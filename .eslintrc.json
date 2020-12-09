@@ -15,5 +15,10 @@
     "plugins": ["prettier"],
     "rules": {
         "prettier/prettier": ["error", { "singleQuote": true, "parser": "flow", "endOfLine": "auto" }]
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.txt"]
+        },
+    ]
 }
